@@ -76,8 +76,11 @@ let mapleader = " "
 :tnoremap <Esc> <C-\><C-n>
 
 " open a new terminal  in aplit of the current tab
-nmap <leader>st :12sp term://zsh<CR>:set nonumber<CR>I
-nmap <leader>et :tabnew term://zsh<CR>:set nonumber<CR>I
+nmap <leader>st :12sp term://zsh<CR>I
+nmap <leader>et :tabnew term://zsh<CR>I
+
+
+autocmd TermOpen * setlocal nonumber norelativenumber
 
 "Number of spaces to use for a <Tab> during editing operations
 set softtabstop=2"
