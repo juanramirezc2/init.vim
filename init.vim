@@ -79,7 +79,7 @@ let mapleader = " "
 nmap <leader>st :12sp term://zsh<CR>I
 nmap <leader>et :tabnew term://zsh<CR>I
 
-
+" no mostrar numeros de linea cuando se abre una terminal :O :O
 autocmd TermOpen * setlocal nonumber norelativenumber
 
 "Number of spaces to use for a <Tab> during editing operations
