@@ -70,13 +70,10 @@ set shiftwidth=2
 :set splitright
 
 "JK for insert mode using vim arpeggio
-call arpeggio#map('i','',0,'jk','<ESC>')
+call arpeggio#map('i','',0,'jk','<ESC>') 
 
 " set a map leader for more key combos
 let mapleader = " "
-
-" terminal emulator exit
-:tnoremap <Esc> <C-\><C-n>
 
 " open a new terminal  in aplit of the current tab
 nmap <leader>st :12sp term://zsh<CR>I
@@ -145,6 +142,8 @@ nnoremap  <leader>h zz
 vnoremap  <leader>h zz
 
 " moverme entre los diferentes paneles
+nmap <leader>w <C-w>w
+
 if has('nvim')
   " Terminal mode:
   tnoremap <M-h> <c-\><c-n><c-w>h
@@ -167,6 +166,9 @@ if has('nvim')
   nnoremap <M-k> <c-w>k
   nnoremap <M-l> <c-w>l
 endif
+
+" terminal emulator exit
+:tnoremap <Esc> <C-\><C-n>
 
 " configuracion para airline
 let g:airline#extensions#tabline#enabled = 1  " Mostrar buffers abiertos (como pestañas)
@@ -202,8 +204,8 @@ let g:prettier#config#parser="babylon"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Run prettier asynchronously before saving
-let g:prettier#autoformat=0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md PrettierAsync
+"let g:prettier#autoformat=0
+"autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md PrettierAsync
 
 " Open a new tab and search for something 
 nmap <leader>f :tab split<CR>:Ack! ""<left>
