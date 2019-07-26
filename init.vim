@@ -7,6 +7,8 @@ Plug 'scrooloose/nerdtree' "proyect tree and structure
 Plug 'tpope/vim-fugitive'
 Plug 'xuyuanp/nerdtree-git-plugin' "nerd tree git status
 Plug 'ctrlpvim/ctrlp.vim'  "files autocomplete for vim
+Plug 'mattn/emmet-vim' " emmet para escribir un poco mas rapidin
+Plug 'easymotion/vim-easymotion' "movamonos un poco mas rapidin con este easymotion
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'  " Temas para airline la barra en la parte baja
 Plug 'airblade/vim-gitgutter' " muestra los cambios en archivos en la parte izquierda donde estan los numeros de linea
@@ -26,7 +28,8 @@ Plug 'majutsushi/tagbar'  "ver todas las funciones y definiciones en un panel la
 call plug#end()
 
 " Luego de esta línea puedes agregar tus configuraciones y mappings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " Hide pointless junk at the bottom, doesn't work in .vimrc for some reason?
 :set laststatus=0
 :set noshowmode "don't show --INSERT--
@@ -39,7 +42,7 @@ endif
 
 "vimR only configurations
 if has("gui_vimr")
-
+  " Font for vimR
 endif
 
 "Enable syntax highlighting and set colorscheme
@@ -185,7 +188,7 @@ autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.gra
 nmap <leader>f :tab split<CR>:Ack! ""<left>
 
 " en modo visual pega laeleccion en un nuevo comando ack :O :O
-vnoremap <Leader>a y:Ack <C-r>=fnameescape(@")<CR><CR>
+vnoremap <Leader>f y:Ack <C-r>=fnameescape(@")<CR><CR>
 
 ""buscar la palabra que hay bajo el cursor en una nueva pestana
 nmap <leader>F :tab split<CR>:Ack! <C-r><C-w><CR>
@@ -258,3 +261,6 @@ nmap <silent><leader>gb :Gblame<cr>
 
 " buscar en el documento lo que este visualmente seleccionado
 vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
+
+" siempre abre un archivo bajo el cursor en un nuevo tab
+nmap gf <c-w>gf
