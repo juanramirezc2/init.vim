@@ -8,7 +8,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'xuyuanp/nerdtree-git-plugin' "nerd tree git status
 Plug 'ctrlpvim/ctrlp.vim'  "files autocomplete for vim
 Plug 'mattn/emmet-vim' " emmet para escribir un poco mas rapidin
-Plug 'mattn/webapi-vim' " emmet necesita este plugin para poder definir un .snippets_custom.json asi que bueno quien no quiere custom snnipets
 Plug 'easymotion/vim-easymotion' "movamonos un poco mas rapidin con este easymotion
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'  " Temas para airline la barra en la parte baja
@@ -256,6 +255,7 @@ set completeopt-=preview
 let g:ycm_add_preview_to_completeopt = 0
 
 " make YCM compatible with UltiSnips (using supertab)
+" taken from https://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
@@ -298,6 +298,3 @@ vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
 
 " siempre abre un archivo bajo el cursor en un nuevo tab
 nmap gf <c-w>gf
-
-" emmet custom snippets
-let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/.config/nvim/emmetsnippets.json')), "\n"))
