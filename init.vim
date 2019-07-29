@@ -8,6 +8,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'xuyuanp/nerdtree-git-plugin' "nerd tree git status
 Plug 'ctrlpvim/ctrlp.vim'  "files autocomplete for vim
 Plug 'mattn/emmet-vim' " emmet para escribir un poco mas rapidin
+Plug 'mattn/webapi-vim' " emmet necesita este plugin para poder definir un .snippets_custom.json asi que bueno quien no quiere custom snnipets
 Plug 'easymotion/vim-easymotion' "movamonos un poco mas rapidin con este easymotion
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'  " Temas para airline la barra en la parte baja
@@ -21,10 +22,14 @@ Plug 'tpope/vim-sensible' " algunas configuraciones por defecto para vim por tpo
 Plug 'pangloss/vim-javascript' "Vastly improved Javascript indentation and syntax support in Vim
 Plug 'mxw/vim-jsx' " coloreado de sintaxis e identacion
 Plug 'tpope/vim-sleuth' " ajusta la identacion y los espacios basados en el archivo :O
-Plug 'ervandew/supertab' " autocompletado usado tab :O
 Plug 'ycm-core/YouCompleteMe'  " auto completer to the game
-Plug  'scrooloose/syntastic' " check sintaxi en tiempo real :O :O
+Plug 'scrooloose/syntastic' " check sintaxi en tiempo real :O :O
 Plug 'majutsushi/tagbar'  "ver todas las funciones y definiciones en un panel lateral para leer codigo :O
+Plug 'terryma/vim-multiple-cursors' " vim multiple cursors same as sublime
+Plug 'SirVer/ultisnips' " snnipets in vim  need python support in vim
+Plug 'honza/vim-snippets' " ultisnips come without any snippets so here they are 
+Plug 'leshill/vim-json' " vim json syntax highlight and other things not sure
+Plug 'ervandew/supertab' " supertab is needed  for YCM and UltiSnnipets integration
 call plug#end()
 
 " Luego de esta línea puedes agregar tus configuraciones y mappings
@@ -77,7 +82,7 @@ let mapleader = " "
 
 " open a new terminal  in aplit of the current tab
 nmap <leader>st :12sp term://zsh<CR>I
-nmap <leader>et :tabnew term://zsh<CR>I
+nmap <leader>t :tabnew term://zsh<CR>I
 
 " no mostrar numeros de linea cuando se abre una terminal :O :O
 autocmd TermOpen * setlocal nonumber norelativenumber
@@ -104,7 +109,7 @@ map k gk
 nnoremap <leader><CR> :noh<CR>
 
 " abrir vim.init en un ventana nueva love it
-nnoremap <leader>t :tabnew $MYVIMRC<CR>
+nnoremap <leader>y :tabnew $MYVIMRC<CR>
 
 " Usar <líder> + y para copiar al portapapeles
 vnoremap <leader>c "+y
@@ -119,7 +124,6 @@ nnoremap <leader>v "+p
 vnoremap <leader>v "+p
 nnoremap <leader>v "+P
 vnoremap <leader>v "+P
-
 
 " Cerrar el buffer actual con <líder> + q
 nnoremap <leader>q :q<CR>
@@ -165,11 +169,15 @@ if has('nvim')
   nnoremap <M-j> <c-w>j
   nnoremap <M-k> <c-w>k
   nnoremap <M-l> <c-w>l
+  "some terminal mappings
+  tnoremap <Esc> <C-\><C-n>
+  tnoremap <M-[> <Esc>
+  tnoremap <C-v><Esc> <Esc>
+  " simulare <C-R>
+  tnoremap <expr> <C-R> '<C-\><C-N>"'.nr2char(getchar()).'pi'
 endif
 
 " terminal emulator exit
-:tnoremap <Esc> <C-\><C-n>
-
 " configuracion para airline
 let g:airline#extensions#tabline#enabled = 1  " Mostrar buffers abiertos (como pestañas)
 let g:airline#extensions#tabline#fnamemod = ':t'  " Mostrar sólo el nombre del archivo
@@ -204,14 +212,14 @@ let g:prettier#config#parser="babylon"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Run prettier asynchronously before saving
-"let g:prettier#autoformat=0
-"autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md PrettierAsync
+let g:prettier#autoformat=0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md PrettierAsync
 
 " Open a new tab and search for something 
 nmap <leader>f :tab split<CR>:Ack! ""<left>
 
 " en modo visual pega laeleccion en un nuevo comando ack :O :O
-vnoremap <Leader>f y:Ack <C-r>=fnameescape(@")<CR><CR>
+vnoremap <Leader>f y:Ack <C-R>=fnameescape(@")<CR><CR>
 
 ""buscar la palabra que hay bajo el cursor en una nueva pestana
 nmap <leader>F :tab split<CR>:Ack! <C-r><C-w><CR>
@@ -234,26 +242,28 @@ nmap <leader>i <C-O>
 " Allow JSX in .js files
 let g:jsx_ext_required=0
 
-" Mappings for moving lines and preserving indentation
-" http://vim.wikia.com/wiki/Moving_lines_up_or_down
-nnoremap <C-j> :m .+1<CR>==
-nnoremap <C-k> :m .-2<CR>==
-vnoremap <C-j> :m '>+1<CR>gv=gv
-vnoremap <C-k> :m '<-2<CR>gv=gv
-
 " ale configuraciones
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
 
-" you complete me config  for a better completion
-" Start autocompletion after 4 chars
-let g:ycm_min_num_of_chars_for_completion = 4
-let g:ycm_min_num_identifier_candidate_chars = 4
-let g:ycm_enable_diagnostic_highlighting = 0
+"navegar entre errores de ale con facilidad usando Alt
+nmap <silent> <M-k> <Plug>(ale_previous_wrap)
+nmap <silent> <M-j> <Plug>(ale_next_wrap)
+
 " Don't show YCM's preview window [ I find it really annoying ]
 set completeopt-=preview
 let g:ycm_add_preview_to_completeopt = 0
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 "syntastic  configurations for newbies 
 set statusline+=%#warningmsg#
@@ -264,6 +274,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
 " funciones y definiciones de variable usando f8
 nmap <F8> :TagbarToggle<CR>
 
@@ -287,3 +298,6 @@ vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
 
 " siempre abre un archivo bajo el cursor en un nuevo tab
 nmap gf <c-w>gf
+
+" emmet custom snippets
+let g:user_emmet_settings = webapi#json#decode(join(readfile(expand('~/.config/nvim/emmetsnippets.json')), "\n"))
