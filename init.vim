@@ -29,6 +29,9 @@ Plug 'SirVer/ultisnips' " snnipets in vim  need python support in vim
 Plug 'honza/vim-snippets' " ultisnips come without any snippets so here they are 
 Plug 'leshill/vim-json' " vim json syntax highlight and other things not sure
 Plug 'ervandew/supertab' " supertab is needed  for YCM and UltiSnnipets integration
+Plug 'kana/vim-textobj-user' "vim-textobj-user - Create your own text objects for vim in an easy way
+Plug 'kana/vim-textobj-function' " vim text objects for functions C language Java Vim script 
+Plug 'haya14busa/vim-textobj-function-syntax' "extends previous one vim-textobj-function-syntax provides heuristic text-objects for function by using syntax definitions.
 call plug#end()
 
 " Luego de esta línea puedes agregar tus configuraciones y mappings
@@ -38,6 +41,12 @@ call plug#end()
 :set laststatus=0
 :set noshowmode "don't show --INSERT--
 :set noruler "don't show line numbers/column/% junk
+
+" guicolors styles for every mode
+:set termguicolors 
+:hi Cursor guifg=green guibg=green
+:hi Cursor2 guifg=red guibg=red
+:set guicursor=n-v-c:block-Cursor/lCursor,i-ci-ve:ver25-Cursor2/lCursor2,r-cr:hor20,o:hor50
 
 " Vim >=8.0 or Neovim >= 0.1.5
 if (has("termguicolors"))
@@ -97,8 +106,8 @@ colorscheme onedark  " Activa tema onedark
 let g:NERDTreeChDirMode = 2  " Cambia el directorio actual al nodo padre actual
 let NERDTreeWinSize = 35  "estado por defecto del ancho de la barra de nerdtree
 "Toggle file drawer in/out
-nmap <leader>n :NERDTreeFind<CR>
-nmap <leader>m :NERDTreeToggle<CR>
+nmap <leader>m :NERDTreeFind<CR>
+nmap <leader>n :NERDTreeToggle<CR>
 
 " so I can go up an down wrapped lines
 map j gj
@@ -253,6 +262,12 @@ nmap <silent> <M-j> <Plug>(ale_next_wrap)
 " Don't show YCM's preview window [ I find it really annoying ]
 set completeopt-=preview
 let g:ycm_add_preview_to_completeopt = 0
+" you complete me config  for a better completion
+"
+" Start autocompletion after 4 chars
+let g:ycm_min_num_of_chars_for_completion = 2
+let g:ycm_min_num_identifier_candidate_chars = 2
+let g:ycm_enable_diagnostic_highlighting = 0
 
 " make YCM compatible with UltiSnips (using supertab)
 " taken from https://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme
@@ -260,7 +275,10 @@ let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
-" better key bindings for UltiSnipsExpandTrigger
+" emmet leader key to be tab
+let g:user_emmet_leader_key=','
+
+"" better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
@@ -298,3 +316,35 @@ vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
 
 " siempre abre un archivo bajo el cursor en un nuevo tab
 nmap gf <c-w>gf
+" custom ulti snippets
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "mycoolsnippets"]
+
+" enable jsdocs syntax highlight
+let g:javascript_plugin_jsdoc = 1
+
+"Enables some additional syntax highlighting for NGDocs. Requires JSDoc plugin to be enabled as well.
+let g:javascript_plugin_ngdoc = 1
+
+" folding code nice config
+if has('folding')
+  set foldmethod=indent               " not as cool as syntax, but faster
+  set foldlevelstart=99               " start unfolded
+endif
+" toggle fold of current position Using S-tab 
+nnoremap <s-tab> za
+"navigate between  close folds OMG taken from https://stackoverflow.com/questions/9403098/is-it-possible-to-jump-to-closed-folds-in-vim
+nnoremap <silent> <tab>j :call NextClosedFold('j')<cr>
+nnoremap <silent> <tab>k :call NextClosedFold('k')<cr>
+function! NextClosedFold(dir)
+    let cmd = 'norm!z' . a:dir
+    let view = winsaveview()
+    let [l0, l, open] = [0, view.lnum, 1]
+    while l != l0 && open
+        exe cmd
+        let [l0, l] = [l, line('.')]
+        let open = foldclosed(l) < 0
+    endwhile
+    if open
+        call winrestview(view)
+    endif
+endfunction
