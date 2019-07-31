@@ -32,6 +32,7 @@ Plug 'ervandew/supertab' " supertab is needed  for YCM and UltiSnnipets integrat
 Plug 'kana/vim-textobj-user' "vim-textobj-user - Create your own text objects for vim in an easy way
 Plug 'kana/vim-textobj-function' " vim text objects for functions C language Java Vim script 
 Plug 'haya14busa/vim-textobj-function-syntax' "extends previous one vim-textobj-function-syntax provides heuristic text-objects for function by using syntax definitions.
+Plug 'scrooloose/nerdcommenter' " comment lines of code using this plugin 
 call plug#end()
 
 " Luego de esta línea puedes agregar tus configuraciones y mappings
@@ -317,8 +318,7 @@ vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
 " siempre abre un archivo bajo el cursor en un nuevo tab
 nmap gf <c-w>gf
 " custom ulti snippets
-let g:UltiSnipsSnippetDirectories=["UltiSnips", "mycoolsnippets"]
-
+let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME.'/.config/nvim/mycoolsnippets']
 " enable jsdocs syntax highlight
 let g:javascript_plugin_jsdoc = 1
 
