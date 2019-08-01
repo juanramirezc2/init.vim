@@ -1,6 +1,5 @@
 " Directorio de plugins
 call plug#begin('~/.local/share/nvim/plugged')
-
 Plug 'joshdick/onedark.vim' "Color scheme inspirado por el tema One Dark de Atom.
 Plug 'tpope/vim-surround' "surround plugin
 Plug 'scrooloose/nerdtree' "proyect tree and structure
@@ -33,6 +32,12 @@ Plug 'kana/vim-textobj-user' "vim-textobj-user - Create your own text objects fo
 Plug 'kana/vim-textobj-function' " vim text objects for functions C language Java Vim script 
 Plug 'haya14busa/vim-textobj-function-syntax' "extends previous one vim-textobj-function-syntax provides heuristic text-objects for function by using syntax definitions.
 Plug 'scrooloose/nerdcommenter' " comment lines of code using this plugin 
+Plug 'hail2u/vim-css3-syntax' "CSS3 syntax (and syntax defined in some foreign specifications) support for Vim's built-in syntax/css.vim
+Plug 'skammer/vim-css-color' " colores previos para los hexa en las hojas de estilo
+Plug 'groenewege/vim-less' "This vim bundle adds syntax highlighting, indenting and autocompletion for the dynamic stylesheet language LESS.  
+Plug 'alvan/vim-closetag' "Auto close (X)HTML tags
+Plug 'xolox/vim-misc' " vim-sessions require this one plugin in order to work :/
+Plug 'xolox/vim-session' " vim sessions who wants to close his config and start setting up his workflow again :(
 call plug#end()
 
 " Luego de esta línea puedes agregar tus configuraciones y mappings
@@ -59,8 +64,6 @@ if has("gui_vimr")
   " Font for vimR
 endif
 
-"Enable syntax highlighting and set colorscheme
-syntax enable
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Keep the error column always visible (jumpy when linter runs on input)
 :set signcolumn=yes
@@ -101,9 +104,11 @@ set softtabstop=2"
 
 " tema y apariencia 
 set termguicolors  " Activa true colors en la terminal
+"Enable syntax highlighting and set colorscheme
+syntax enable
 colorscheme onedark  " Activa tema onedark
 
-" nerdtree config
+" NerdTree configs
 let g:NERDTreeChDirMode = 2  " Cambia el directorio actual al nodo padre actual
 let NERDTreeWinSize = 35  "estado por defecto del ancho de la barra de nerdtree
 "Toggle file drawer in/out
@@ -188,9 +193,11 @@ endif
 
 " terminal emulator exit
 " configuracion para airline
+let g:airline#extensions#syntastic#enabled = 1 "syntastic esta activado 
+let g:airline#extensions#branch#enabled = 1 "TBH not sure what this means
 let g:airline#extensions#tabline#enabled = 1  " Mostrar buffers abiertos (como pestañas)
 let g:airline#extensions#tabline#fnamemod = ':t'  " Mostrar sólo el nombre del archivo
-
+let g:airline#extensions#tagbar#enabled = 1 "" muestra el nombre de la funcion en la que estoy :O
 " Cargar fuente Powerline y símbolos (ver nota)
 let g:airline_powerline_fonts = 1
 
@@ -348,3 +355,9 @@ function! NextClosedFold(dir)
         call winrestview(view)
     endif
 endfunction
+
+" session management
+let g:session_directory = "~/.vim/session"
+let g:session_autoload = "yes"
+let g:session_autosave = "no"
+let g:session_command_aliases = 1
