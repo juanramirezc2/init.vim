@@ -13,8 +13,26 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'  " Temas para airline la barra en la parte baja
 Plug 'airblade/vim-gitgutter' " muestra los cambios en archivos en la parte izquierda donde estan los numeros de linea
 Plug 'jiangmiao/auto-pairs' " automaticamente cierra comillas o llaves
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'branch': 'release/1.x',
+  \ 'for': [
+    \ 'javascript',
+    \ 'typescript',
+    \ 'css',
+    \ 'less',
+    \ 'scss',
+    \ 'json',
+    \ 'graphql',
+    \ 'markdown',
+    \ 'vue',
+    \ 'lua',
+    \ 'php',
+    \ 'python',
+    \ 'ruby',
+    \ 'html',
+    \ 'swift' ] }
 Plug 'mileszs/ack.vim' " ack for vim NEEDS $ brew install ack to be installed in mac
-Plug 'prettier/vim-prettier', { 'do': 'npm install' } " post install (yarn install | npm install)
 Plug 'kana/vim-arpeggio' " permite JK para entrar en insert mode 
 Plug 'w0rp/ale' " analizador static asincrono
 Plug 'tpope/vim-sensible' " algunas configuraciones por defecto para vim por tpope
@@ -34,7 +52,6 @@ Plug 'kana/vim-textobj-function' " vim text objects for functions C language Jav
 Plug 'haya14busa/vim-textobj-function-syntax' "extends previous one vim-textobj-function-syntax provides heuristic text-objects for function by using syntax definitions.
 Plug 'scrooloose/nerdcommenter' " comment lines of code using this plugin 
 Plug 'hail2u/vim-css3-syntax' "CSS3 syntax (and syntax defined in some foreign specifications) support for Vim's built-in syntax/css.vim
-Plug 'skammer/vim-css-color' " colores previos para los hexa en las hojas de estilo
 Plug 'groenewege/vim-less' "This vim bundle adds syntax highlighting, indenting and autocompletion for the dynamic stylesheet language LESS.  
 Plug 'alvan/vim-closetag' "Auto close (X)HTML tags
 Plug 'xolox/vim-misc' " vim-sessions require this one plugin in order to work :/
@@ -110,7 +127,13 @@ set termguicolors  " Activa true colors en la terminal
 syntax enable
 colorscheme onedark  " Activa tema onedark
 
-" NerdTree configs
+" run prettier when leaving insert mode or when saving
+" when running at every change you may want to disable quickfix
+let g:prettier#quickfix_enabled = 0
+let g:prettier#autoformat = 0
+autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+
+"" NerdTree configs
 let g:NERDTreeChDirMode = 2  " Cambia el directorio actual al nodo padre actual
 let NERDTreeWinSize = 35  "estado por defecto del ancho de la barra de nerdtree
 "Toggle file drawer in/out
@@ -224,27 +247,13 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-stand
 " ctrlp is very smart and try to guest the proyect dir, but i don't need that
 let g:ctrlp_working_path_mode = ""
 
-" prettier configs
-" Use babylon parser with prettier
-let g:prettier#config#parser="babylon"
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Run prettier asynchronously before saving
-let g:prettier#autoformat=0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md PrettierAsync
-
 " Open a new tab and search for something 
 nmap <leader>f :tab split<CR>:Ack! ""<left>
 
 " en modo visual pega laeleccion en un nuevo comando ack :O :O
 vnoremap <Leader>f y:Ack <C-R>=fnameescape(@")<CR><CR>
-" Ack custom configs
-let g:ack_lhandler = "botright lopen 30"
-let g:ackhighlight = 0
-let g:ack_autoclose = 0
-let g:ack_autofold_results = 0
-let g:ackpreview = 0
-""buscar la palabra que hay bajo el cursor en una nueva pestana
+"buscar la palabra que hay bajo el cursor en una nueva pestana
 nmap <leader>F :tab split<CR>:Ack! <C-r><C-w><CR>
 
 " ctrp mapping 

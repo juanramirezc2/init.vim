@@ -4,21 +4,43 @@ snippet bye "My mail signature"
 Good bye, Sir. Hope to talk to you soon.
 - Arthur, King of Britain
 endsnippet
-snippet .respond "respondTo"
-.respondTo(@breakPt, @content, @orientation: "") {}
+snippet letter "letter snnipet"
+Dear $1,
+$0
+Yours sincerely,
+$2
 endsnippet
-snippet .respond "respondTo"
-.respondToMax(@breakPt, @content) {}
+snippet .respond "respondTo snippet"
+.respondTo('${1:medium}', {
+  $2
+});
+$0
+endsnippet
+snippet .respond "respondToMax snippet"
+.respondToMax('${1:medium}', {
+  $2
+});
+$0
 endsnippet
 snippet .respond "respondToXsMax"
-.respondToXsMax(@content) {}
+.respondToXsMax({
+  $1
+});
+$0
+endsnippet
+snippet .respond "respondToSmallMax"
+.respondToSmallMax({
+  $1
+});
+$0
 endsnippet
 snippet .respond "respondTo"
-.respondToSmallMax(@content) {}
+.respondToMediumMax(@content) {
+$0
+}
 endsnippet
 snippet .respond "respondTo"
-.respondToMediumMax(@content) {}
-endsnippet
-snippet .respond "respondTo"
-.respondToLargeMax(@content) {}
+.respondToLargeMax(@content) {
+$0
+}
 endsnippet

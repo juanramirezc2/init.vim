@@ -1,0 +1,7 @@
+{
+  "less": {
+    "snippets": {"gabo": "@import url(|);",
+      ".fp": ".font-primary();",
+      "igabo": "gabriel ramirez"
+}
+}}
