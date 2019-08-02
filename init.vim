@@ -7,12 +7,13 @@ Plug 'tpope/vim-fugitive'
 Plug 'xuyuanp/nerdtree-git-plugin' "nerd tree git status
 Plug 'ctrlpvim/ctrlp.vim'  "files autocomplete for vim
 Plug 'mattn/emmet-vim' " emmet para escribir un poco mas rapidin
+Plug 'mattn/webapi-vim' " emmet custom snippets need this plugin in order to work
 Plug 'easymotion/vim-easymotion' "movamonos un poco mas rapidin con este easymotion
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'  " Temas para airline la barra en la parte baja
 Plug 'airblade/vim-gitgutter' " muestra los cambios en archivos en la parte izquierda donde estan los numeros de linea
 Plug 'jiangmiao/auto-pairs' " automaticamente cierra comillas o llaves
-Plug 'mileszs/ack.vim' " ack for vim
+Plug 'mileszs/ack.vim' " ack for vim NEEDS $ brew install ack to be installed in mac
 Plug 'prettier/vim-prettier', { 'do': 'npm install' } " post install (yarn install | npm install)
 Plug 'kana/vim-arpeggio' " permite JK para entrar en insert mode 
 Plug 'w0rp/ale' " analizador static asincrono
@@ -38,6 +39,7 @@ Plug 'groenewege/vim-less' "This vim bundle adds syntax highlighting, indenting 
 Plug 'alvan/vim-closetag' "Auto close (X)HTML tags
 Plug 'xolox/vim-misc' " vim-sessions require this one plugin in order to work :/
 Plug 'xolox/vim-session' " vim sessions who wants to close his config and start setting up his workflow again :(
+Plug 'lumiliet/vim-twig' " twig syntax highlighting
 call plug#end()
 
 " Luego de esta línea puedes agregar tus configuraciones y mappings
@@ -236,7 +238,12 @@ nmap <leader>f :tab split<CR>:Ack! ""<left>
 
 " en modo visual pega laeleccion en un nuevo comando ack :O :O
 vnoremap <Leader>f y:Ack <C-R>=fnameescape(@")<CR><CR>
-
+" Ack custom configs
+let g:ack_lhandler = "botright lopen 30"
+let g:ackhighlight = 0
+let g:ack_autoclose = 0
+let g:ack_autofold_results = 0
+let g:ackpreview = 0
 ""buscar la palabra que hay bajo el cursor en una nueva pestana
 nmap <leader>F :tab split<CR>:Ack! <C-r><C-w><CR>
 
@@ -326,6 +333,9 @@ vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
 nmap gf <c-w>gf
 " custom ulti snippets
 let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME.'/.config/nvim/mycoolsnippets']
+
+" emmet vim custom snnipets i really love snippets
+let g:user_emmet_settings = webapi#json#decode(join(readfile(expand( $HOME.'/.config/nvim/emmet_custom/snippets.json')), "\n"))
 " enable jsdocs syntax highlight
 let g:javascript_plugin_jsdoc = 1
 
