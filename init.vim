@@ -13,25 +13,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'  " Temas para airline la barra en la parte baja
 Plug 'airblade/vim-gitgutter' " muestra los cambios en archivos en la parte izquierda donde estan los numeros de linea
 Plug 'jiangmiao/auto-pairs' " automaticamente cierra comillas o llaves
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'branch': 'release/1.x',
-  \ 'for': [
-    \ 'javascript',
-    \ 'typescript',
-    \ 'css',
-    \ 'less',
-    \ 'scss',
-    \ 'json',
-    \ 'graphql',
-    \ 'markdown',
-    \ 'vue',
-    \ 'lua',
-    \ 'php',
-    \ 'python',
-    \ 'ruby',
-    \ 'html',
-    \ 'swift' ] }
+Plug 'sbdchd/neoformat' " Neo format suppert prettier out of the box :O
+Plug 'Valloric/MatchTagAlways' " highlight closing tag helpful for jsx and html
 Plug 'mileszs/ack.vim' " ack for vim NEEDS $ brew install ack to be installed in mac
 Plug 'kana/vim-arpeggio' " permite JK para entrar en insert mode 
 Plug 'w0rp/ale' " analizador static asincrono
@@ -45,6 +28,8 @@ Plug 'majutsushi/tagbar'  "ver todas las funciones y definiciones en un panel la
 Plug 'terryma/vim-multiple-cursors' " vim multiple cursors same as sublime
 Plug 'SirVer/ultisnips' " snnipets in vim  need python support in vim
 Plug 'honza/vim-snippets' " ultisnips come without any snippets so here they are 
+Plug 'epilande/vim-es2015-snippets' " Custom ultisnippets for ES2015 and vim
+Plug 'epilande/vim-react-snippets' "Custom ultisnippets for react and vim
 Plug 'leshill/vim-json' " vim json syntax highlight and other things not sure
 Plug 'ervandew/supertab' " supertab is needed  for YCM and UltiSnnipets integration
 Plug 'kana/vim-textobj-user' "vim-textobj-user - Create your own text objects for vim in an easy way
@@ -56,7 +41,9 @@ Plug 'groenewege/vim-less' "This vim bundle adds syntax highlighting, indenting 
 Plug 'alvan/vim-closetag' "Auto close (X)HTML tags
 Plug 'xolox/vim-misc' " vim-sessions require this one plugin in order to work :/
 Plug 'xolox/vim-session' " vim sessions who wants to close his config and start setting up his workflow again :(
+Plug 'mhinz/vim-startify' "bellisima y magnifica primera pantalla para vim
 Plug 'lumiliet/vim-twig' " twig syntax highlighting
+Plug 'ludovicchabant/vim-gutentags' " tags for vim, makes use of Universal Ctags which generates tags .ctags config file taken from   universal ctags from 
 call plug#end()
 
 " Luego de esta línea puedes agregar tus configuraciones y mappings
@@ -126,12 +113,6 @@ set termguicolors  " Activa true colors en la terminal
 "Enable syntax highlighting and set colorscheme
 syntax enable
 colorscheme onedark  " Activa tema onedark
-
-" run prettier when leaving insert mode or when saving
-" when running at every change you may want to disable quickfix
-let g:prettier#quickfix_enabled = 0
-let g:prettier#autoformat = 0
-autocmd BufWritePre,TextChanged,InsertLeave *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
 "" NerdTree configs
 let g:NERDTreeChDirMode = 2  " Cambia el directorio actual al nodo padre actual
@@ -244,8 +225,8 @@ let g:ctrlp_custom_ignore = {
 " https://github.com/kien/ctrlp.vim/issues/174
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
 
-" ctrlp is very smart and try to guest the proyect dir, but i don't need that
-let g:ctrlp_working_path_mode = ""
+" root of the project is where the package.json is located
+let g:ctrlp_root_markers = ['package.json']
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Open a new tab and search for something 
@@ -377,6 +358,36 @@ endfunction
 
 " session management
 let g:session_directory = "~/.vim/session"
-let g:session_autoload = "yes"
 let g:session_autosave = "no"
 let g:session_command_aliases = 1
+" Allow MatchTagAlways to highlight JSX
+let g:mta_filetypes = {
+    \ 'html' : 1,
+    \ 'xhtml' : 1,
+    \ 'xml' : 1,
+    \ 'javascript.jsx' : 1,
+    \}
+
+"user same colors for highlight as vim uses
+let g:mta_use_matchparen_group = 1 
+"run neoformat on save, text changed and leaving insert mode allowing to run the UnDo
+augroup fmt
+  autocmd!
+  au BufWritePre * try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry
+augroup END
+
+"ack vim mappings 
+let g:ack_mappings = {
+      \ "t": "<C-W><CR><C-W>T",
+      \ "T": "<C-W><CR><C-W>TgT<C-W>j",
+      \ "go": "<CR>",
+      \ "O": "<CR><C-W><C-W>:ccl<CR>",
+      \ "o": "<CR><C-W>j",
+      \ "h": "<C-W><CR><C-W>K",
+      \ "H": "<C-W><CR><C-W>K<C-W>b",
+      \ "v": "<C-W><CR><C-W>H<C-W>b<C-W>J<C-W>t",
+      \ "gv": "<C-W><CR><C-W>H<C-W>b<C-W>J" }
+let g:ack_lhandler = "botright lopen 20"
+" vim Tags mappings are awfull
+nmap <leader>] <c-]>
+nmap <leader>' <c-w><c-]>
