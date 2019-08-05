@@ -12,3 +12,5 @@ alias ctags="`brew --prefix`/bin/ctags"
 alias ctags >> ~/.zshrc
 clone this .ctags file under ~/.ctags.d/default.ctags https://github.com/agorf/ctags-patterns-for-javascript
 echo "set tags=tags" >> ~/.vimrc
+ignore tags in local git repository using
+\$ echo "tags" >> .git/info/exclude
