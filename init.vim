@@ -391,3 +391,19 @@ let g:ack_lhandler = "botright lopen 20"
 " vim Tags mappings are awfull
 nmap <leader>] <c-]>
 nmap <leader>' <c-w><c-]>
+" startify sessions and other tweaks
+let g:startify_session_dir = '~/.vim/session'
+let g:startify_files_number = 5
+let g:startify_lists = [
+      \ { 'type': 'sessions',  'header': ['   Sessions']       },
+      \ { 'type': 'files',     'header': ['   MRU']            },
+      \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+      \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+      \ { 'type': 'commands',  'header': ['   Commands']       },
+      \ ]
+let g:startify_commands = [
+      \ ':help reference',
+      \ ['Vim Reference', 'h ref'],
+      \ {'h': 'h ref'},
+      \ {'m': ['My magical function', 'call Magic()']},
+      \ ]
