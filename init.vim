@@ -1,6 +1,8 @@
 " Directorio de plugins
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'joshdick/onedark.vim' "Color scheme inspirado por el tema One Dark de Atom.
+Plug 'xolox/vim-misc' " vim-sessions require this one plugin in order to work :/
+Plug 'xolox/vim-session' " vim sessions support nerd tree open panels and buffers
 Plug 'tpope/vim-surround' "surround plugin
 Plug 'scrooloose/nerdtree' "proyect tree and structure
 Plug 'tpope/vim-fugitive'
@@ -39,8 +41,6 @@ Plug 'scrooloose/nerdcommenter' " comment lines of code using this plugin
 Plug 'hail2u/vim-css3-syntax' "CSS3 syntax (and syntax defined in some foreign specifications) support for Vim's built-in syntax/css.vim
 Plug 'groenewege/vim-less' "This vim bundle adds syntax highlighting, indenting and autocompletion for the dynamic stylesheet language LESS.  
 Plug 'alvan/vim-closetag' "Auto close (X)HTML tags
-Plug 'xolox/vim-misc' " vim-sessions require this one plugin in order to work :/
-Plug 'xolox/vim-session' " vim sessions who wants to close his config and start setting up his workflow again :(
 Plug 'mhinz/vim-startify' "bellisima y magnifica primera pantalla para vim
 Plug 'lumiliet/vim-twig' " twig syntax highlighting
 Plug 'ludovicchabant/vim-gutentags' " tags for vim, makes use of Universal Ctags which generates tags .ctags config file taken from   universal ctags from 
