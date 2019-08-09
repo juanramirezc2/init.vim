@@ -18,7 +18,6 @@ Plug 'jiangmiao/auto-pairs' " automaticamente cierra comillas o llaves
 Plug 'sbdchd/neoformat' " Neo format suppert prettier out of the box :O
 Plug 'Valloric/MatchTagAlways' " highlight closing tag helpful for jsx and html
 Plug 'mileszs/ack.vim' " ack for vim NEEDS $ brew install ack to be installed in mac
-Plug 'kana/vim-arpeggio' " permite JK para entrar en insert mode 
 Plug 'w0rp/ale' " analizador static asincrono
 Plug 'tpope/vim-sensible' " algunas configuraciones por defecto para vim por tpope
 Plug 'pangloss/vim-javascript' "Vastly improved Javascript indentation and syntax support in Vim
@@ -27,7 +26,6 @@ Plug 'tpope/vim-sleuth' " ajusta la identacion y los espacios basados en el arch
 Plug 'ycm-core/YouCompleteMe'  " auto completer to the game
 Plug 'scrooloose/syntastic' " check sintaxi en tiempo real :O :O
 Plug 'majutsushi/tagbar'  "ver todas las funciones y definiciones en un panel lateral para leer codigo :O
-Plug 'terryma/vim-multiple-cursors' " vim multiple cursors same as sublime
 Plug 'SirVer/ultisnips' " snnipets in vim  need python support in vim
 Plug 'honza/vim-snippets' " ultisnips come without any snippets so here they are 
 Plug 'epilande/vim-es2015-snippets' " Custom ultisnippets for ES2015 and vim
@@ -44,6 +42,7 @@ Plug 'alvan/vim-closetag' "Auto close (X)HTML tags
 Plug 'mhinz/vim-startify' "bellisima y magnifica primera pantalla para vim
 Plug 'lumiliet/vim-twig' " twig syntax highlighting
 Plug 'ludovicchabant/vim-gutentags' " tags for vim, makes use of Universal Ctags which generates tags .ctags config file taken from   universal ctags from 
+Plug 'yggdroot/indentline' " indent guides lines let's see how they goes
 call plug#end()
 
 " Luego de esta línea puedes agregar tus configuraciones y mappings
@@ -55,7 +54,7 @@ call plug#end()
 :set noruler "don't show line numbers/column/% junk
 
 " guicolors styles for every mode
-:set termguicolors 
+:set termguicolors
 :hi Cursor guifg=green guibg=green
 :hi Cursor2 guifg=red guibg=red
 :set guicursor=n-v-c:block-Cursor/lCursor,i-ci-ve:ver25-Cursor2/lCursor2,r-cr:hor20,o:hor50
@@ -93,8 +92,7 @@ set shiftwidth=2
 :set splitright
 
 "JK for insert mode using vim arpeggio
-call arpeggio#map('i','',0,'jk','<ESC>') 
-
+imap jk <Esc>
 " set a map leader for more key combos
 let mapleader = " "
 
@@ -146,27 +144,14 @@ nnoremap <leader>v "+P
 vnoremap <leader>v "+P
 
 " Cerrar el buffer actual con <líder> + q
-nnoremap <leader>q :q<CR>
+nnoremap <silent><C-Q> :q<CR>
 
 " pestanaiguiente  y pesana anterior
-nnoremap <leader>r gt
-nnoremap <leader>e  gT
-" map  HLM  to leader
-" ir al inicio de la zona visible
-nnoremap  <leader>k H
-vnoremap  <leader>k H
-" ir con el curso a l medio de la zona visible
-nnoremap  <leader>l M
-vnoremap  <leader>l M
-" ir con el cursor al fina de la zona visible
-nnoremap  <leader>j L
-vnoremap  <leader>j L
-" center cursor vertically
-nnoremap  <leader>h zz
-vnoremap  <leader>h zz
+nnoremap <C-R> gt
+nnoremap <C-E> gT
 
 " moverme entre los diferentes paneles
-nmap <leader>w <C-w>w
+nmap <C-W> <C-w>w
 
 if has('nvim')
   " Terminal mode:
@@ -190,7 +175,7 @@ if has('nvim')
   nnoremap <M-k> <c-w>k
   nnoremap <M-l> <c-w>l
   "some terminal mappings
-  tnoremap <Esc> <C-\><C-n>
+  tnoremap jk <C-\><C-n>
   tnoremap <M-[> <Esc>
   tnoremap <C-v><Esc> <Esc>
   " simulare <C-R>
@@ -237,20 +222,8 @@ vnoremap <Leader>f y:Ack <C-R>=fnameescape(@")<CR><CR>
 "buscar la palabra que hay bajo el cursor en una nueva pestana
 nmap <leader>F :tab split<CR>:Ack! <C-r><C-w><CR>
 
-" ctrp mapping 
-nmap <leader>p <C-P>
-
 " necesito mirar como usar control P en modo visual 
 vnoremap <Leader>p y:CtrlP<CR><Insert>
-
-" atajo para guardar usando ctrl-s :w que pereza
-noremap  <D>s :update<CR>
-vnoremap <D>s <C-C>:update<CR>
-inoremap <D>s <C-O>:update<CR>
-
-" ultima posision del cursor
-nmap <leader>o <C-I>
-nmap <leader>i <C-O>
 
 " Allow JSX in .js files
 let g:jsx_ext_required=0
@@ -369,11 +342,11 @@ let g:mta_filetypes = {
     \}
 
 "user same colors for highlight as vim uses
-let g:mta_use_matchparen_group = 1 
+let g:mta_use_matchparen_group = 1
 "run neoformat on save, text changed and leaving insert mode allowing to run the UnDo
 augroup fmt
   autocmd!
-  au BufWritePre * try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry
+  autocmd BufWritePre *  Neoformat
 augroup END
 
 "ack vim mappings 
@@ -388,16 +361,12 @@ let g:ack_mappings = {
       \ "v": "<C-W><CR><C-W>H<C-W>b<C-W>J<C-W>t",
       \ "gv": "<C-W><CR><C-W>H<C-W>b<C-W>J" }
 let g:ack_lhandler = "botright lopen 20"
-" vim Tags mappings are awfull
-nmap <leader>] <c-]>
-nmap <leader>' <c-w><c-]>
 " startify sessions and other tweaks
 let g:startify_session_dir = '~/.vim/session'
-let g:startify_files_number = 5
+let g:startify_files_number = 10
 let g:startify_lists = [
       \ { 'type': 'sessions',  'header': ['   Sessions']       },
       \ { 'type': 'files',     'header': ['   MRU']            },
-      \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
       \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
       \ { 'type': 'commands',  'header': ['   Commands']       },
       \ ]
@@ -407,3 +376,52 @@ let g:startify_commands = [
       \ {'h': 'h ref'},
       \ {'m': ['My magical function', 'call Magic()']},
       \ ]
+
+" save file mappings
+" Iterm2 key bindings set cmd-s Send Text with 'vim' Special Chars to \<C-S>
+noremap  <silent><C-S> :update<CR>
+vnoremap <silent><C-S> <C-C>:update<CR>
+inoremap <silent><C-S> <C-O>:update<CR>
+
+" vim jumps mappings are counterintuirive
+nmap <C-G> <S-G>
+vnoremap <C-G> <S-G>
+nmap <C-[> [{
+nmap <C-]> ]}
+nmap <C-H> ^
+vmap <C-H> ^
+nnoremap <C-L> $
+vnoremap <C-L> $
+nnoremap <C-O> <C-I>
+nnoremap <C-I> <C-O>
+" map  HLM  to leader
+" ir al inicio de la zona visible
+nnoremap <M-K> H
+nnoremap <M-J> L
+nnoremap <C-K> <C-U>
+nnoremap <C-J> <C-D>
+" ir con el curso a l medio de la zona visible
+nnoremap  <leader>l M
+vnoremap  <leader>l M
+" ir con el cursor al fina de la zona visible
+" easy motions vertical movements
+nmap <leader>e <Plug>(easymotion-e)
+nmap <leader>w <Plug>(easymotion-w)
+nmap <leader>j <Plug>(easymotion-j)
+nmap <leader>k <Plug>(easymotion-k)
+nmap <leader>b <Plug>(easymotion-b)
+" center cursor vertically
+nnoremap  <leader>h zz
+vnoremap  <leader>h zz
+nmap <C-D> gd
+"ctrlp conflict
+let g:ctrlp_map = '<leader>p'
+" ctrp mapping 
+nmap <leader>p <C-P>
+" vim Tags mappings are awfull
+nnoremap <C-P> <c-]>
+nnoremap <C-[> <c-w><c-]>
+"g*  next matching search (not whole word) pattern under cursor
+"g#  previous matching search (not whole word) pattern under cursor
+"gd  go to definition/first occurrence of the word under cursor
+
