@@ -16,7 +16,7 @@ snippet .respond "respondTo snippet"
 });
 $0
 endsnippet
-snippet .respond "respondToMax snippet"
+snippet .respond "respondToMax"
 .respondToMax('${1:medium}', {
   $2
 });
@@ -34,13 +34,15 @@ snippet .respond "respondToSmallMax"
 });
 $0
 endsnippet
-snippet .respond "respondTo"
-.respondToMediumMax(@content) {
+snippet .respond "respondToMediumMax"
+.respondToMediumMax({
+  $1
+});
 $0
-}
 endsnippet
-snippet .respond "respondTo"
-.respondToLargeMax(@content) {
+snippet .respond "respondToLargeMax"
+.respondToLargeMax({
+  $1
+});
 $0
-}
 endsnippet

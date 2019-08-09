@@ -43,6 +43,7 @@ Plug 'mhinz/vim-startify' "bellisima y magnifica primera pantalla para vim
 Plug 'lumiliet/vim-twig' " twig syntax highlighting
 Plug 'ludovicchabant/vim-gutentags' " tags for vim, makes use of Universal Ctags which generates tags .ctags config file taken from   universal ctags from 
 Plug 'yggdroot/indentline' " indent guides lines let's see how they goes
+Plug 'yuttie/comfortable-motion.vim' " smooth motions and avoid get losed scrolling
 call plug#end()
 
 " Luego de esta línea puedes agregar tus configuraciones y mappings
@@ -396,10 +397,12 @@ nnoremap <C-O> <C-I>
 nnoremap <C-I> <C-O>
 " map  HLM  to leader
 " ir al inicio de la zona visible
-nnoremap <M-K> H
-nnoremap <M-J> L
-nnoremap <C-K> <C-U>
-nnoremap <C-J> <C-D>
+nnoremap <S-K> H
+nnoremap <S-J> L
+nmap <C-K> <C-U>
+vmap <C-K> <C-U>
+nmap <C-J> <C-D>
+vmap <C-J> <C-D>
 " ir con el curso a l medio de la zona visible
 nnoremap  <leader>l M
 vnoremap  <leader>l M
