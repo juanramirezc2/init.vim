@@ -2,6 +2,7 @@
 call plug#begin('~/.local/share/nvim/plugged')
 Plug 'joshdick/onedark.vim' "Color scheme inspirado por el tema One Dark de Atom.
 Plug 'xolox/vim-misc' " vim-sessions require this one plugin in order to work :/
+Plug 'yuttie/comfortable-motion.vim' " smooth motions and avoid get losed scrolling
 Plug 'xolox/vim-session' " vim sessions support nerd tree open panels and buffers
 Plug 'tpope/vim-surround' "surround plugin
 Plug 'scrooloose/nerdtree' "proyect tree and structure
@@ -43,7 +44,6 @@ Plug 'mhinz/vim-startify' "bellisima y magnifica primera pantalla para vim
 Plug 'lumiliet/vim-twig' " twig syntax highlighting
 Plug 'ludovicchabant/vim-gutentags' " tags for vim, makes use of Universal Ctags which generates tags .ctags config file taken from   universal ctags from 
 Plug 'yggdroot/indentline' " indent guides lines let's see how they goes
-Plug 'yuttie/comfortable-motion.vim' " smooth motions and avoid get losed scrolling
 call plug#end()
 
 " Luego de esta línea puedes agregar tus configuraciones y mappings
@@ -396,13 +396,6 @@ vnoremap <C-L> $
 nnoremap <C-O> <C-I>
 nnoremap <C-I> <C-O>
 " map  HLM  to leader
-" ir al inicio de la zona visible
-nnoremap <S-K> H
-nnoremap <S-J> L
-nmap <C-K> <C-U>
-vmap <C-K> <C-U>
-nmap <C-J> <C-D>
-vmap <C-J> <C-D>
 " ir con el curso a l medio de la zona visible
 nnoremap  <leader>l M
 vnoremap  <leader>l M
@@ -416,7 +409,7 @@ nmap <leader>b <Plug>(easymotion-b)
 " center cursor vertically
 nnoremap  <leader>h zz
 vnoremap  <leader>h zz
-nmap <C-D> gd
+"nmap <C-D> gd
 "ctrlp conflict
 let g:ctrlp_map = '<leader>p'
 " ctrp mapping 
@@ -427,4 +420,13 @@ nnoremap <C-[> <c-w><c-]>
 "g*  next matching search (not whole word) pattern under cursor
 "g#  previous matching search (not whole word) pattern under cursor
 "gd  go to definition/first occurrence of the word under cursor
-
+"let g:comfortable_motion_no_default_key_mappings=1
+let g:comfortable_motion_scroll_down_key = "j"
+let g:comfortable_motion_scroll_up_key = "k"
+let g:comfortable_motion_no_default_key_mappings = 1
+let g:comfortable_motion_impulse_multiplier = 100  " Feel free to increase/decrease this value.
+" scroll down and up half of the page smoothly
+nnoremap <silent> <C-j> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier  * 1)<CR>
+vnoremap <silent> <C-j> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier  * 1)<CR>
+nnoremap <silent> <C-k> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier  * -1)<CR>
+vnoremap <silent> <C-k> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier  * -1)<CR>
