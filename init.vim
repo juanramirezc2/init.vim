@@ -256,8 +256,9 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " emmet leader key to be tab
 let g:user_emmet_leader_key=','
+let g:user_emmet_mode='i'  " emmet only in insert mode, comma crashes with repeat search vim command
 
-"" better key bindings for UltiSnipsExpandTrigger
+" better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
@@ -350,7 +351,10 @@ augroup fmt
   autocmd BufWritePre *  Neoformat
 augroup END
 
-"ack vim mappings 
+"ack vim mappings  and configs
+"use ag command the silver searcher seems faster and well supported more than
+"ack and not config needed it looks .gitignore for ignore patterns
+let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:ack_mappings = {
       \ "t": "<C-W><CR><C-W>T",
       \ "T": "<C-W><CR><C-W>TgT<C-W>j",
@@ -416,7 +420,7 @@ let g:ctrlp_map = '<leader>p'
 nmap <leader>p <C-P>
 " vim Tags mappings are awfull
 nnoremap <C-P> <c-]>
-nnoremap <C-[> <c-w><c-]>
+nnoremap <C-U> <c-w><c-]>
 "g*  next matching search (not whole word) pattern under cursor
 "g#  previous matching search (not whole word) pattern under cursor
 "gd  go to definition/first occurrence of the word under cursor
