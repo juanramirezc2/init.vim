@@ -92,8 +92,6 @@ set shiftwidth=2
 :set splitbelow
 :set splitright
 
-"JK for insert mode using vim arpeggio
-imap jk <Esc>
 " set a map leader for more key combos
 let mapleader = " "
 
