@@ -64,7 +64,8 @@ call plug#end()
 if (has("termguicolors"))
    set termguicolors
 endif
-
+"no swap files in vim they are annoying
+set noswapfile 
 "vimR only configurations
 if has("gui_vimr")
   " Font for vimR
@@ -143,14 +144,14 @@ nnoremap <leader>v "+P
 vnoremap <leader>v "+P
 
 " Cerrar el buffer actual con <líder> + q
-nnoremap <silent><C-Q> :q<CR>
+nnoremap <silent><S-Q> :q<CR>
 
 " pestanaiguiente  y pesana anterior
-nnoremap <C-R> gt
-nnoremap <C-E> gT
+nnoremap <S-R> gt
+nnoremap <S-E> gT
 
 " moverme entre los diferentes paneles
-nmap <C-W> <C-w>w
+nmap <S-W> <C-w>w
 
 if has('nvim')
   " Terminal mode:
@@ -174,7 +175,7 @@ if has('nvim')
   nnoremap <M-k> <c-w>k
   nnoremap <M-l> <c-w>l
   "some terminal mappings
-  tnoremap jk <C-\><C-n>
+  tnoremap <Esc> <C-\><C-n>
   tnoremap <M-[> <Esc>
   tnoremap <C-v><Esc> <Esc>
   " simulare <C-R>
@@ -242,8 +243,8 @@ let g:ycm_add_preview_to_completeopt = 0
 " you complete me config  for a better completion
 "
 " Start autocompletion after 4 chars
-let g:ycm_min_num_of_chars_for_completion = 2
-let g:ycm_min_num_identifier_candidate_chars = 2
+"let g:ycm_min_num_of_chars_for_completion = 2
+"let g:ycm_min_num_identifier_candidate_chars = 2
 let g:ycm_enable_diagnostic_highlighting = 0
 
 " make YCM compatible with UltiSnips (using supertab)
@@ -266,8 +267,6 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
