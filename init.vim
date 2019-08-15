@@ -115,6 +115,9 @@ colorscheme onedark  " Activa tema onedark
 "" NerdTree configs
 let g:NERDTreeChDirMode = 2  " Cambia el directorio actual al nodo padre actual
 let NERDTreeWinSize = 35  "estado por defecto del ancho de la barra de nerdtree
+" NerdTree Refresh Root crashes with my <S-R> command for moving between tags
+let NERDTreeMapRefreshRoot='r'
+
 "Toggle file drawer in/out
 nmap <leader>m :NERDTreeFind<CR>
 nmap <leader>n :NERDTreeToggle<CR>
@@ -234,8 +237,8 @@ let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
 
 "navegar entre errores de ale con facilidad usando Alt
-nmap <silent> <M-k> <Plug>(ale_previous_wrap)
-nmap <silent> <M-j> <Plug>(ale_next_wrap)
+nmap <silent> <C-S-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-S-j> <Plug>(ale_next_wrap)
 
 " Don't show YCM's preview window [ I find it really annoying ]
 set completeopt-=preview
@@ -310,7 +313,7 @@ if has('folding')
   set foldlevelstart=99               " start unfolded
 endif
 " toggle fold of current position Using S-tab 
-nnoremap <s-tab> za
+"nnoremap <Tab> za
 "navigate between  close folds OMG taken from https://stackoverflow.com/questions/9403098/is-it-possible-to-jump-to-closed-folds-in-vim
 nnoremap <silent> <tab>j :call NextClosedFold('j')<cr>
 nnoremap <silent> <tab>k :call NextClosedFold('k')<cr>
@@ -431,3 +434,12 @@ nnoremap <silent> <C-j> :call comfortable_motion#flick(g:comfortable_motion_impu
 vnoremap <silent> <C-j> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier  * 1)<CR>
 nnoremap <silent> <C-k> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier  * -1)<CR>
 vnoremap <silent> <C-k> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier  * -1)<CR>
+" search mappings
+" `<Tab>`/`<S-Tab>` to move between matches without leaving incremental search.
+" Note dependency on `'wildcharm'` being set to `<C-z>` in order for this to
+" work.
+cnoremap <expr> <Tab> getcmdtype() == '/' \|\| getcmdtype() == '?' ? '<CR>/<C-r>/' : '<C-z>'
+cnoremap <expr> <S-Tab> getcmdtype() == '/' \|\| getcmdtype() == '?' ? '<CR>?<C-r>/' : '<S-Tab>'
+" Store relative line number jumps in the jumplist if they exceed a threshold.
+nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k'
+nnoremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j'
