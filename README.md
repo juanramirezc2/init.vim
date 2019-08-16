@@ -42,16 +42,3 @@ clone this .ctags file under ~/.ctags https://github.com/romainl/ctags-patterns-
 echo "set tags=tags" >> ~/.vimrc
 ignore tags in local git repository using
 \$ echo "tags" >> .git/info/exclude
-
-## advanced OSX mappings using karabiner
-
-karabiner let us map caps locks to esc if pressed alone or to ctrl if pressed with others
-
-follow this helpfull post
-https://medium.com/@pechyonkin/how-to-map-capslock-to-control-and-escape-on-mac-60523a64022b
-this capslocks rocks
-https://raw.githubusercontent.com/Vonng/Capslock/master/mac/capslock.json
-
-```
-
-```
