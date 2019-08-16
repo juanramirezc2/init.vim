@@ -44,6 +44,11 @@ Plug 'mhinz/vim-startify' "bellisima y magnifica primera pantalla para vim
 Plug 'lumiliet/vim-twig' " twig syntax highlighting
 Plug 'ludovicchabant/vim-gutentags' " tags for vim, makes use of Universal Ctags which generates tags .ctags config file taken from   universal ctags from 
 Plug 'yggdroot/indentline' " indent guides lines let's see how they goes
+Plug 'michaeljsmith/vim-indent-object' " blocks of indentation as vim text objects
+Plug 'kana/vim-textobj-line' "Text objects for the current line
+Plug 'kana/vim-textobj-entire' "entire file as vim object
+Plug 'vim-scripts/ReplaceWithRegister' "avoid visual selection when pasting 
+Plug 'christoomey/vim-system-copy' " copy into the system
 call plug#end()
 
 " Luego de esta línea puedes agregar tus configuraciones y mappings
@@ -51,6 +56,8 @@ call plug#end()
 
 " Hide pointless junk at the bottom, doesn't work in .vimrc for some reason?
 :set laststatus=0
+" i'm not agains the mouse, enable it in all modes
+:set mouse=a
 :set noshowmode "don't show --INSERT--
 :set noruler "don't show line numbers/column/% junk
 
@@ -153,8 +160,8 @@ nnoremap <silent><S-Q> :q<CR>
 nnoremap <S-R> gt
 nnoremap <S-E> gT
 
-" moverme entre los diferentes paneles
-nmap <S-W> <C-w>w
+" moverme entre los diferentes paneles con Shift-w
+nnoremap <S-w>   <c-w>w
 
 if has('nvim')
   " Terminal mode:
@@ -387,12 +394,17 @@ let g:startify_commands = [
 noremap  <silent><C-S> :update<CR>
 vnoremap <silent><C-S> <C-C>:update<CR>
 inoremap <silent><C-S> <C-O>:update<CR>
-
+" muestra el numero de linea relativo hacia abajo y hacia arriba relativo a
+" donde estoy
+:set relativenumber
 " vim jumps mappings are counterintuirive
 nmap <C-G> <S-G>
 vnoremap <C-G> <S-G>
-nmap <C-[> [{
-nmap <C-]> ]}
+nmap { [{
+nmap } ]}
+nmap ( [(
+nmap ) ])
+nmap <C-H> ^
 nmap <C-H> ^
 vmap <C-H> ^
 nnoremap <C-L> $
@@ -408,7 +420,9 @@ vnoremap  <leader>l M
 nmap <leader>e <Plug>(easymotion-e)
 nmap <leader>w <Plug>(easymotion-w)
 nmap <leader>j <Plug>(easymotion-j)
+vmap <leader>j <Plug>(easymotion-j)
 nmap <leader>k <Plug>(easymotion-k)
+vmap <leader>k <Plug>(easymotion-k)
 nmap <leader>b <Plug>(easymotion-b)
 " center cursor vertically
 nnoremap  <leader>h zz
@@ -419,8 +433,15 @@ let g:ctrlp_map = '<leader>p'
 " ctrp mapping 
 nmap <leader>p <C-P>
 " vim Tags mappings are awfull
-nnoremap <C-P> <c-]>
-nnoremap <C-U> <c-w><c-]>
+nnoremap <C-P> g<c-]>
+nnoremap <C-U> :pop<cr>
+
+" Movement in insert mode
+inoremap <C-h> <C-o>h
+inoremap <C-l> <C-o>a
+inoremap <C-j> <C-o>j
+inoremap <C-k> <C-o>k
+inoremap <C-^> <C-o><C-^> 
 "g*  next matching search (not whole word) pattern under cursor
 "g#  previous matching search (not whole word) pattern under cursor
 "gd  go to definition/first occurrence of the word under cursor
@@ -438,8 +459,15 @@ vnoremap <silent> <C-k> :call comfortable_motion#flick(g:comfortable_motion_impu
 " `<Tab>`/`<S-Tab>` to move between matches without leaving incremental search.
 " Note dependency on `'wildcharm'` being set to `<C-z>` in order for this to
 " work.
-cnoremap <expr> <Tab> getcmdtype() == '/' \|\| getcmdtype() == '?' ? '<CR>/<C-r>/' : '<C-z>'
+"cnoremap <expr> <Tab> getcmdtype() == '/' \|\| getcmdtype() == '?' ? '<CR>/<C-r>/' : '<C-z>'
 cnoremap <expr> <S-Tab> getcmdtype() == '/' \|\| getcmdtype() == '?' ? '<CR>?<C-r>/' : '<S-Tab>'
 " Store relative line number jumps in the jumplist if they exceed a threshold.
 nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k'
 nnoremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j'
+"nnoremap Q @q
+"Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+" jk | Escaping!
+inoremap jk <Esc>
+xnoremap jk <Esc>
+cnoremap jk <C-c>
