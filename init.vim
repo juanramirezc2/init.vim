@@ -6,7 +6,7 @@ Plug 'yuttie/comfortable-motion.vim' " smooth motions and avoid get losed scroll
 Plug 'xolox/vim-session' " vim sessions support nerd tree open panels and buffers
 Plug 'tpope/vim-surround' "surround plugin
 Plug 'scrooloose/nerdtree' "proyect tree and structure
-Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive' " git on vim 
 Plug 'xuyuanp/nerdtree-git-plugin' "nerd tree git status
 Plug 'ctrlpvim/ctrlp.vim'  "files autocomplete for vim
 Plug 'mattn/emmet-vim' " emmet para escribir un poco mas rapidin
@@ -147,12 +147,6 @@ nnoremap <leader>c "+y
 vnoremap <leader>x "+d
 nnoremap <leader>x "+d
 
-" Usar <líder> + p para pegar desde el portapapeles
-nnoremap <leader>v "+p
-vnoremap <leader>v "+p
-nnoremap <leader>v "+P
-vnoremap <leader>v "+P
-
 " Cerrar el buffer actual con <líder> + q
 nnoremap <silent><S-Q> :q<CR>
 
@@ -185,7 +179,7 @@ if has('nvim')
   nnoremap <M-k> <c-w>k
   nnoremap <M-l> <c-w>l
   "some terminal mappings
-  tnoremap <Esc> <C-\><C-n>
+  tnoremap jk <C-\><C-n>
   tnoremap <M-[> <Esc>
   tnoremap <C-v><Esc> <Esc>
   " simulare <C-R>
@@ -199,9 +193,13 @@ let g:airline#extensions#branch#enabled = 1 "TBH not sure what this means
 let g:airline#extensions#tabline#enabled = 1  " Mostrar buffers abiertos (como pestañas)
 let g:airline#extensions#tabline#fnamemod = ':t'  " Mostrar sólo el nombre del archivo
 let g:airline#extensions#tagbar#enabled = 1 "" muestra el nombre de la funcion en la que estoy :O
+"it seems that powerline fonts need this
+set t_Co=256
 " Cargar fuente Powerline y símbolos (ver nota)
 let g:airline_powerline_fonts = 1
 
+"only display the filename in airline status 
+let g:airline_section_c = '%t'
 set noshowmode  " No mostrar el modo actual (ya lo muestra la barra de estado)
 
 " Configuracion para gitgutter
@@ -243,9 +241,9 @@ let g:ale_sign_column_always = 1
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
 
-"navegar entre errores de ale con facilidad usando Alt
-nmap <silent> <C-S-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-S-j> <Plug>(ale_next_wrap)
+" Move between linting errors
+nnoremap ]r :ALENextWrap<CR>
+nnoremap [r :ALEPreviousWrap<CR>
 
 " Don't show YCM's preview window [ I find it really annoying ]
 set completeopt-=preview
@@ -283,6 +281,9 @@ let g:syntastic_check_on_wq = 0
 " funciones y definiciones de variable usando f8
 nmap <F8> :TagbarToggle<CR>
 
+" tagbar auto open on supported files only
+"autocmd FileType c, javascript.jsx nested :TagbarOpen
+ autocmd VimEnter * nested :call tagbar#autoopen(1)
 "tag bar width 
 let g:tagbar_width = 50
 let g:tagbar_compact = 1
