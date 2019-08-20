@@ -200,6 +200,30 @@ let g:airline_powerline_fonts = 1
 
 "only display the filename in airline status 
 let g:airline_section_c = '%t'
+
+" set of text to display for each mode. this time a single letter is enought
+
+let g:airline_mode_map = {
+      \ '__'     : '-',
+      \ 'c'      : 'C',
+      \ 'i'      : 'I',
+      \ 'ic'     : 'I',
+      \ 'ix'     : 'I',
+      \ 'n'      : 'N',
+      \ 'multi'  : 'M',
+      \ 'ni'     : 'N',
+      \ 'no'     : 'N',
+      \ 'R'      : 'R',
+      \ 'Rv'     : 'R',
+      \ 's'      : 'S',
+      \ 'S'      : 'S',
+      \ ''     : 'S',
+      \ 't'      : 'T',
+      \ 'v'      : 'V',
+      \ 'V'      : 'V',
+      \ ''     : 'V',
+      \ }
+
 set noshowmode  " No mostrar el modo actual (ya lo muestra la barra de estado)
 
 " Configuracion para gitgutter
@@ -437,7 +461,6 @@ nmap <leader>p <C-P>
 nnoremap <C-P> g<c-]>
 nnoremap <C-U> :pop<cr>
 
-" Movement in insert mode
 inoremap <C-h> <C-o>h
 inoremap <C-l> <C-o>a
 inoremap <C-j> <C-o>j
