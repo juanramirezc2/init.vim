@@ -142,6 +142,8 @@ nnoremap <leader>y :tabnew $MYVIMRC<CR>
 " Usar <líder> + y para copiar al portapapeles
 vnoremap <leader>c "+y
 nnoremap <leader>c "+y
+vnoremap <leader>v "+p
+nnoremap <leader>v "+P
 
 " Usar <líder> + d para cortar al portapapeles
 vnoremap <leader>x "+d
@@ -460,7 +462,7 @@ nmap <leader>p <C-P>
 " vim Tags mappings are awfull
 nnoremap <C-P> g<c-]>
 nnoremap <C-U> :pop<cr>
-
+let g:AutoPairsMapCh = 'C-.'
 inoremap <C-h> <C-o>h
 inoremap <C-l> <C-o>a
 inoremap <C-j> <C-o>j
@@ -495,3 +497,4 @@ map <leader>cd :cd %:p:h<cr>:pwd<cr>
 inoremap jk <Esc>
 xnoremap jk <Esc>
 cnoremap jk <C-c>
+

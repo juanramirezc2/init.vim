@@ -42,3 +42,15 @@ clone this .ctags file under ~/.ctags https://github.com/romainl/ctags-patterns-
 echo "set tags=tags" >> ~/.vimrc
 ignore tags in local git repository using
 \$ echo "tags" >> .git/info/exclude
+
+## build neovim from source :O :O
+
+clone the repository
+install build dependencies
+https://github.com/neovim/neovim/wiki/Building-Neovim#build-prerequisites
+`brew install ninja libtool automake cmake pkg-config gettext`
+`git clone https://github.com/neovim/neovim.git`
+`cd neovim`
+then build it into the OSX bins folder
+`$make CMAKE_INSTALL_PREFIX=/usr/local install`
+run `:checkhealth` for more info ;)
