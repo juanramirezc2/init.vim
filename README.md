@@ -7,7 +7,9 @@ https://stsewd.dev/es/posts/neovim-installation-configuration/
 
 ## allow terminal to access the clipboard
 
-`$brew install pbcopy`
+```sh
+$brew install pbcopy
+```
 
 ## compile YCM using typescript engine
 
@@ -28,7 +30,7 @@ https://github.com/ycm-core/YouCompleteMe#javascript-and-typescript-semantic-com
 ## YCM uses term config file
 
 create a `.tern-config` and fill it with
-https://github.com/ternjs/tern/issues/759#issuecomment-315607047
+`https://github.com/ternjs/tern/issues/759#issuecomment-315607047`
 
 ## ag the silver searcher
 
@@ -40,19 +42,35 @@ ackvim support ag the silver searcher as a command so we need to install it
 install ctags and use it as default local bin OSX has its own ctags package and sucks
 brew install ctags
 Afterwards, you may need to set the alias to the new version by running:
+
+```sh
 alias ctags="`brew --prefix`/bin/ctags"
 alias ctags >> ~/.zshrc
-clone this .ctags file under ~/.ctags https://github.com/romainl/ctags-patterns-for-javascript
+```
+
+clone this .ctags file under `~/.ctags`
+
+```sh
+git clone https://github.com/romainl/ctags-patterns-for-javascript
+```
+
 echo "set tags=tags" >> ~/.vimrc
 ignore tags in local git repository using
-\$ echo "tags" >> .git/info/exclude
+
+```sh
+$ echo "tags" >> .git/info/exclude
+```
 
 ## build neovim from source :O :O
 
-clone the repository
-install build dependencies
+###install build dependencies
 https://github.com/neovim/neovim/wiki/Building-Neovim#build-prerequisites
-`brew install ninja libtool automake cmake pkg-config gettext`
+
+```sh
+brew install ninja libtool automake cmake pkg-config gettext
+```
+
+###clone the repository
 
 ```sh
 git clone https://github.com/neovim/neovim.git
@@ -62,7 +80,19 @@ git clone https://github.com/neovim/neovim.git
 cd neovim
 ```
 
-then build it into the OSX bins folder this builds the release version if you built previously remove`build`folder with`rm -rf build`the run`\$make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX=/usr/local install`run`:checkhealth` for more info ;)
+then build it into the OSX bins folder this builds the release version if you built previously remove`build`folder with
+
+```sh
+rm -rf build
+```
+
+then run
+
+```sh
+$make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX=/usr/local install
+```
+
+run`:checkhealth` for more info ;)
 
 # nodejs neovim plugins support ;)
 
