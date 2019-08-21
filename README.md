@@ -5,6 +5,10 @@
 https://stsewd.dev/es/posts/neovim-plugins/
 https://stsewd.dev/es/posts/neovim-installation-configuration/
 
+## allow terminal to access the clipboard
+
+`$brew install pbcopy`
+
 ## compile YCM using typescript engine
 
 run \$ /install.py --ts-completer
@@ -53,5 +57,8 @@ https://github.com/neovim/neovim/wiki/Building-Neovim#build-prerequisites
 `cd neovim`
 then build it into the OSX bins folder
 this builds the release version
+if you built previously remove `build` folder with
+`rm -rf build`
+the run
 `$make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX=/usr/local install`
 run `:checkhealth` for more info ;)
