@@ -52,5 +52,6 @@ https://github.com/neovim/neovim/wiki/Building-Neovim#build-prerequisites
 `git clone https://github.com/neovim/neovim.git`
 `cd neovim`
 then build it into the OSX bins folder
-`$make CMAKE_INSTALL_PREFIX=/usr/local install`
+this builds the release version
+`$make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX=/usr/local install`
 run `:checkhealth` for more info ;)
