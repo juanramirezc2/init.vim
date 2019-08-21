@@ -31,7 +31,7 @@ create a jsconfig.json file with
 }
 ```
 
-https://github.com/ycm-core/YouCompleteMe#javascript-and-typescript-semantic-completion
+[more info about TS semantic autocompletion](https://github.com/ycm-core/YouCompleteMe#javascript-and-typescript-semantic-completion)
 
 ## YCM uses term config file
 
