@@ -2,8 +2,8 @@
 
 ## useful links
 
-https://stsewd.dev/es/posts/neovim-plugins/
-https://stsewd.dev/es/posts/neovim-installation-configuration/
+[neovim plugins](https://stsewd.dev/es/posts/neovim-plugins)
+[neovim instalation and configuration](https://stsewd.dev/es/posts/neovim-installation-configuration)
 
 ## allow terminal to access the clipboard
 
@@ -13,7 +13,13 @@ $brew install pbcopy
 
 ## compile YCM using typescript engine
 
-run \$ /install.py --ts-completer
+run
+
+```sh
+$ youcompleteme/install.py --ts-completer
+
+```
+
 create a jsconfig.json file with
 
 ```
@@ -35,7 +41,10 @@ create a `.tern-config` and fill it with
 ## ag the silver searcher
 
 ackvim support ag the silver searcher as a command so we need to install it
-\$brew install the_silver_searcher
+
+```sh
+$brew install the_silver_searcher
+```
 
 ## universal ctags needed by gutentags
 
