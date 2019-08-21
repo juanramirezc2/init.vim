@@ -53,12 +53,17 @@ clone the repository
 install build dependencies
 https://github.com/neovim/neovim/wiki/Building-Neovim#build-prerequisites
 `brew install ninja libtool automake cmake pkg-config gettext`
-`git clone https://github.com/neovim/neovim.git`
-`cd neovim`
-then build it into the OSX bins folder
-this builds the release version
-if you built previously remove `build` folder with
-`rm -rf build`
-the run
-`$make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX=/usr/local install`
-run `:checkhealth` for more info ;)
+
+```sh
+git clone https://github.com/neovim/neovim.git
+```
+
+```sh
+cd neovim
+```
+
+then build it into the OSX bins folder this builds the release version if you built previously remove`build`folder with`rm -rf build`the run`\$make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX=/usr/local install`run`:checkhealth` for more info ;)
+
+# nodejs neovim plugins support ;)
+
+`$ npm install -g neovim`
