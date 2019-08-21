@@ -63,14 +63,15 @@ $ echo "tags" >> .git/info/exclude
 
 ## build neovim from source :O :O
 
-###install build dependencies
+### install build dependencies
+
 https://github.com/neovim/neovim/wiki/Building-Neovim#build-prerequisites
 
 ```sh
 brew install ninja libtool automake cmake pkg-config gettext
 ```
 
-###clone the repository
+### clone the repository
 
 ```sh
 git clone https://github.com/neovim/neovim.git
