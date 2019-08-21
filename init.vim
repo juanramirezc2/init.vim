@@ -49,6 +49,7 @@ Plug 'kana/vim-textobj-line' "Text objects for the current line
 Plug 'kana/vim-textobj-entire' "entire file as vim object
 Plug 'vim-scripts/ReplaceWithRegister' "avoid visual selection when pasting 
 Plug 'christoomey/vim-system-copy' " copy into the system
+Plug 'andymass/vim-matchup' " drop-in replacement for the vim plugin matchit.vim
 call plug#end()
 
 " Luego de esta línea puedes agregar tus configuraciones y mappings
@@ -297,10 +298,12 @@ let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 "syntastic  configurations for newbies 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%#warningmsg# 
+set statusline+=%{SyntasticStatuslineFlag()} 
 set statusline+=%*
 
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
@@ -497,4 +500,6 @@ map <leader>cd :cd %:p:h<cr>:pwd<cr>
 inoremap jk <Esc>
 xnoremap jk <Esc>
 cnoremap jk <C-c>
-
+" maximum lenght of characters displayed in a git diff 
+highlight ColorColumn ctermbg=gray
+set colorcolumn=125
