@@ -37,23 +37,31 @@ $ youcompleteme/install.py --ts-completer
 
 ```
 
-create a jsconfig.json file with
+create a ~/jsconfig.json file with
 
-```
+```json
 {
-    "compilerOptions": {
-        "target": "es6"
-    },
-    "exclude": ["node_modules"]
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "allowJs": true,
+    "checkJs": true,
+    "jsx": "react",
+    "outDir": "./build",
+    "removeComments": true,
+    "noEmit": true,
+    "pretty": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/node_modules/*"]
 }
 ```
 
 [more info about TS semantic autocompletion](https://github.com/ycm-core/YouCompleteMe#javascript-and-typescript-semantic-completion)
-
-## YCM uses term config file
-
-create a `.tern-config` and fill it with
-`https://github.com/ternjs/tern/issues/759#issuecomment-315607047`
 
 ## ag the silver searcher
 
