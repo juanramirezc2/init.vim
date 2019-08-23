@@ -1,55 +1,64 @@
 " Directorio de plugins
 call plug#begin('~/.local/share/nvim/plugged')
-Plug 'joshdick/onedark.vim' "Color scheme inspirado por el tema One Dark de Atom.
+"startup and sessions managers
 Plug 'xolox/vim-misc' " vim-sessions require this one plugin in order to work :/
-Plug 'yuttie/comfortable-motion.vim' " smooth motions and avoid get losed scrolling
 Plug 'xolox/vim-session' " vim sessions support nerd tree open panels and buffers
-Plug 'tpope/vim-surround' "surround plugin
-Plug 'scrooloose/nerdtree' "proyect tree and structure
-Plug 'tpope/vim-fugitive' " git on vim 
-Plug 'xuyuanp/nerdtree-git-plugin' "nerd tree git status
-Plug 'ctrlpvim/ctrlp.vim'  "files autocomplete for vim
-Plug 'mattn/emmet-vim' " emmet para escribir un poco mas rapidin
-Plug 'mattn/webapi-vim' " emmet custom snippets need this plugin in order to work
+Plug 'mhinz/vim-startify' "bellisima y magnifica primera pantalla para vim
+"Moving arround
 Plug 'easymotion/vim-easymotion' "movamonos un poco mas rapidin con este easymotion
+Plug 'yuttie/comfortable-motion.vim' " smooth motions and avoid get losed scrolling
+"GUI customization
+Plug 'joshdick/onedark.vim' "Color scheme inspirado por el tema One Dark de Atom.
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'  " Temas para airline la barra en la parte baja
-Plug 'airblade/vim-gitgutter' " muestra los cambios en archivos en la parte izquierda donde estan los numeros de linea
-Plug 'jiangmiao/auto-pairs' " automaticamente cierra comillas o llaves
-Plug 'sbdchd/neoformat' " Neo format suppert prettier out of the box :O
-Plug 'Valloric/MatchTagAlways' " highlight closing tag helpful for jsx and html
+Plug 'yggdroot/indentline' " indent guides lines let's see how they goes
+"File browsers
 Plug 'mileszs/ack.vim' " ack for vim NEEDS $ brew install ack to be installed in mac
-Plug 'w0rp/ale' " analizador static asincrono
-Plug 'tpope/vim-sensible' " algunas configuraciones por defecto para vim por tpope
-Plug 'pangloss/vim-javascript' "Vastly improved Javascript indentation and syntax support in Vim
-Plug 'mxw/vim-jsx' " coloreado de sintaxis e identacion
-Plug 'tpope/vim-sleuth' " ajusta la identacion y los espacios basados en el archivo :O
-Plug 'ycm-core/YouCompleteMe'  " auto completer to the game
-Plug 'scrooloose/syntastic' " check sintaxi en tiempo real :O :O
+Plug 'ctrlpvim/ctrlp.vim'  "files autocomplete for vim
+Plug 'scrooloose/nerdtree' "proyect tree and structure
+" code browser Tags managers 
+Plug 'ludovicchabant/vim-gutentags' " tags for vim, makes use of Universal Ctags which generates tags .ctags config file taken from   universal ctags from 
 Plug 'majutsushi/tagbar'  "ver todas las funciones y definiciones en un panel lateral para leer codigo :O
+" linters,syntax checkers and formatters
+Plug 'w0rp/ale' " analizador static asincrono
+Plug 'scrooloose/syntastic' " check sintaxi en tiempo real :O :O
+Plug 'sbdchd/neoformat' " Neo format suppert prettier out of the box :O
+" Git helpers
+Plug 'airblade/vim-gitgutter' " muestra los cambios en archivos en la parte izquierda donde estan los numeros de linea
+Plug 'tpope/vim-fugitive' " git on vim 
+Plug 'xuyuanp/nerdtree-git-plugin' "nerd tree git status
+Plug 'jiangmiao/auto-pairs' " automaticamente cierra comillas o llaves
+Plug 'tpope/vim-sleuth' " ajusta la identacion y los espacios basados en el archivo :O
+" vim snnipets 
 Plug 'SirVer/ultisnips' " snnipets in vim  need python support in vim
 Plug 'honza/vim-snippets' " ultisnips come without any snippets so here they are 
 Plug 'epilande/vim-es2015-snippets' " Custom ultisnippets for ES2015 and vim
 Plug 'epilande/vim-react-snippets' "Custom ultisnippets for react and vim
-Plug 'leshill/vim-json' " vim json syntax highlight and other things not sure
 Plug 'ervandew/supertab' " supertab is needed  for YCM and UltiSnnipets integration
+Plug 'mattn/emmet-vim' " emmet para escribir un poco mas rapidin
+Plug 'mattn/webapi-vim' " emmet custom snippets need this plugin in order to work
+" Syntax highlighteres 
+Plug 'leshill/vim-json' " vim json syntax highlight and other things not sure
+Plug 'pangloss/vim-javascript' "Vastly improved Javascript indentation and syntax support in Vim
+Plug 'mxw/vim-jsx' " coloreado de sintaxis e identacion
+Plug 'hail2u/vim-css3-syntax' "CSS3 syntax (and syntax defined in some foreign specifications) support for Vim's built-in syntax/css.vim
+Plug 'groenewege/vim-less' "This vim bundle adds syntax highlighting, indenting and autocompletion for the dynamic stylesheet language LESS.  
+" Custom vim Text Objects
 Plug 'kana/vim-textobj-user' "vim-textobj-user - Create your own text objects for vim in an easy way
 Plug 'kana/vim-textobj-function' " vim text objects for functions C language Java Vim script 
 Plug 'haya14busa/vim-textobj-function-syntax' "extends previous one vim-textobj-function-syntax provides heuristic text-objects for function by using syntax definitions.
-Plug 'scrooloose/nerdcommenter' " comment lines of code using this plugin 
-Plug 'hail2u/vim-css3-syntax' "CSS3 syntax (and syntax defined in some foreign specifications) support for Vim's built-in syntax/css.vim
-Plug 'groenewege/vim-less' "This vim bundle adds syntax highlighting, indenting and autocompletion for the dynamic stylesheet language LESS.  
-Plug 'alvan/vim-closetag' "Auto close (X)HTML tags
-Plug 'mhinz/vim-startify' "bellisima y magnifica primera pantalla para vim
-Plug 'lumiliet/vim-twig' " twig syntax highlighting
-Plug 'ludovicchabant/vim-gutentags' " tags for vim, makes use of Universal Ctags which generates tags .ctags config file taken from   universal ctags from 
-Plug 'yggdroot/indentline' " indent guides lines let's see how they goes
 Plug 'michaeljsmith/vim-indent-object' " blocks of indentation as vim text objects
 Plug 'kana/vim-textobj-line' "Text objects for the current line
 Plug 'kana/vim-textobj-entire' "entire file as vim object
+Plug 'andymass/vim-matchup' " drop-in replacement for the vim plugin matchit.vim
+" code auto completers and helpers
+Plug 'ycm-core/YouCompleteMe'  " auto completer to the game
+Plug 'scrooloose/nerdcommenter' " comment lines of code using this plugin 
+Plug 'alvan/vim-closetag' "Auto close (X)HTML tags
+Plug 'tpope/vim-surround' "surround plugin
+" other plugins
 Plug 'vim-scripts/ReplaceWithRegister' "avoid visual selection when pasting 
 Plug 'christoomey/vim-system-copy' " copy into the system
-Plug 'andymass/vim-matchup' " drop-in replacement for the vim plugin matchit.vim
 call plug#end()
 
 " Luego de esta línea puedes agregar tus configuraciones y mappings
@@ -117,9 +126,10 @@ set softtabstop=2"
 " tema y apariencia 
 set termguicolors  " Activa true colors en la terminal
 "Enable syntax highlighting and set colorscheme
+let g:onedark_terminal_italics =  1 "allow italics in one dark colorscheme
 syntax enable
+set background=dark
 colorscheme onedark  " Activa tema onedark
-
 "" NerdTree configs
 let g:NERDTreeChDirMode = 2  " Cambia el directorio actual al nodo padre actual
 let NERDTreeWinSize = 35  "estado por defecto del ancho de la barra de nerdtree
