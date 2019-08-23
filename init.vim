@@ -280,8 +280,8 @@ let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
 
 " Move between linting errors
-nnoremap ]r :ALENextWrap<CR>
-nnoremap [r :ALEPreviousWrap<CR>
+nmap <silent> ]r <Plug>(ale_previous_wrap)
+nmap <silent> [r <Plug>(ale_next_wrap)
 
 " Don't show YCM's preview window [ I find it really annoying ]
 set completeopt-=preview
@@ -308,9 +308,8 @@ let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
-"syntastic  configurations for newbies 
-set statusline+=%#warningmsg# 
-set statusline+=%{SyntasticStatuslineFlag()} 
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
