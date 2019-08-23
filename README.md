@@ -43,7 +43,7 @@ create a ~/jsconfig.json file with
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es5",
+    "target": "ES6",
     "allowJs": true,
     "checkJs": true,
     "jsx": "react",
