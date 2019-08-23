@@ -1,3 +1,20 @@
+## Iterm 2 one dark color scheme
+
+### Installation Instructions
+
+- Clone or download this repo
+
+```sh
+ git clone git@github.com:nathanbuchar/atom-one-dark-terminal.git && cd atom-one-dark-terminal
+```
+
+- Go to `schemes/` folder
+
+- Double click on selected `*.itermcolors` file. It will open a new Terminal window with that
+  color scheme.
+
+- Set the scheme as the default one with `Preferences -> Profiles -> Colors -> Load Presets`
+
 # requirements
 
 ## useful links

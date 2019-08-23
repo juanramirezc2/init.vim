@@ -7,6 +7,8 @@ Plug 'mhinz/vim-startify' "bellisima y magnifica primera pantalla para vim
 "Moving arround
 Plug 'easymotion/vim-easymotion' "movamonos un poco mas rapidin con este easymotion
 Plug 'yuttie/comfortable-motion.vim' " smooth motions and avoid get losed scrolling
+Plug 'andymass/vim-matchup' " drop-in replacement for the vim plugin matchit.vim
+Plug 'haya14busa/incsearch.vim' " Improved incremental searching for Vim
 "GUI customization
 Plug 'joshdick/onedark.vim' "Color scheme inspirado por el tema One Dark de Atom.
 Plug 'vim-airline/vim-airline'
@@ -50,7 +52,6 @@ Plug 'haya14busa/vim-textobj-function-syntax' "extends previous one vim-textobj-
 Plug 'michaeljsmith/vim-indent-object' " blocks of indentation as vim text objects
 Plug 'kana/vim-textobj-line' "Text objects for the current line
 Plug 'kana/vim-textobj-entire' "entire file as vim object
-Plug 'andymass/vim-matchup' " drop-in replacement for the vim plugin matchit.vim
 " code auto completers and helpers
 Plug 'ycm-core/YouCompleteMe'  " auto completer to the game
 Plug 'scrooloose/nerdcommenter' " comment lines of code using this plugin 
@@ -70,6 +71,9 @@ call plug#end()
 :set mouse=a
 :set noshowmode "don't show --INSERT--
 :set noruler "don't show line numbers/column/% junk
+
+" avoid messi matchi load
+let g:loaded_matchit = 1
 
 " guicolors styles for every mode
 :set termguicolors
@@ -143,9 +147,6 @@ nmap <leader>n :NERDTreeToggle<CR>
 " so I can go up an down wrapped lines
 map j gj
 map k gk
-
-" limpiar la busqueda usando shift enter 
-nnoremap <leader><CR> :noh<CR>
 
 " abrir vim.init en un ventana nueva love it
 nnoremap <leader>y :tabnew $MYVIMRC<CR>
@@ -513,3 +514,16 @@ cnoremap jk <C-c>
 " maximum lenght of characters displayed in a git diff 
 highlight ColorColumn ctermbg=gray
 set colorcolumn=125
+" inc search plugin mappings
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+" :h g:incsearch#auto_nohlsearch
+set hlsearch
+let g:incsearch#auto_nohlsearch = 1
+map n  <Plug>(incsearch-nohl-n)
+map N  <Plug>(incsearch-nohl-N)
+map *  <Plug>(incsearch-nohl-*)
+map #  <Plug>(incsearch-nohl-#)
+map g* <Plug>(incsearch-nohl-g*)
+map g# <Plug>(incsearch-nohl-g#)
