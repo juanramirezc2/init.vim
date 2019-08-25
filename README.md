@@ -1,3 +1,28 @@
+## iterm 2 Fira font with ligatures
+
+clone
+
+```sh
+git clone https://github.com/tonsky/FiraCode
+```
+
+```sh
+cd FiraCode/distr/ttf/
+```
+
+then
+
+- Select all font files
+- Right click and select Open (alternatively Open With Font Book)
+- Select "Install Font"
+
+in iTerm go to
+
+`Preferences->Profiles->text`
+in Font select `Fira Code Regular`
+set Font size to `14`
+check set ligatures `on`
+
 ## Iterm 2 one dark color scheme
 
 ### Installation Instructions

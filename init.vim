@@ -81,6 +81,8 @@ let g:loaded_matchit = 1
 :hi Cursor2 guifg=red guibg=red
 :set guicursor=n-v-c:block-Cursor/lCursor,i-ci-ve:ver25-Cursor2/lCursor2,r-cr:hor20,o:hor50
 
+set guifont=Fira\ Code:h12
+
 " Vim >=8.0 or Neovim >= 0.1.5
 if (has("termguicolors"))
    set termguicolors
@@ -526,3 +528,29 @@ map *  <Plug>(incsearch-nohl-*)
 map #  <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
+
+" interactive find replace preview
+set inccommand=nosplit
+" replace word under cursor, globally, with confirmation
+nnoremap <Leader>r :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
+vnoremap <Leader>r y :%s/<C-r>"//gc<Left><Left><Left>
+" clear search with shift+enter
+nnoremap <S-CR> :noh<CR>
+" gutentags out if the way
+let g:gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
+if g:gitroot !=# ''
+  let g:gutentags_cache_dir = g:gitroot .'/.git/tags'
+else
+  let g:gutentags_cache_dir = $HOME .'/.cache/guten_tags'
+endif
+let g:gutentags_exclude_project_root = ['/usr/local', $HOME]
+let g:gutentags_file_list_command = {
+      \ 'markers': {
+      \ '.git': 'git ls-files',
+      \ },
+      \ }
+let g:gutentags_resolve_symlinks = 1
+let g:gutentags_generate_on_missing = 1
+let g:gutentags_generate_on_new = 1
+let g:gutentags_generate_on_write = 1
+"let g:gutentags_trace = 1
