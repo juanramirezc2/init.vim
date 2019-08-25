@@ -553,4 +553,4 @@ let g:gutentags_resolve_symlinks = 1
 let g:gutentags_generate_on_missing = 1
 let g:gutentags_generate_on_new = 1
 let g:gutentags_generate_on_write = 1
-"let g:gutentags_trace = 1
+let g:gutentags_trace = 1

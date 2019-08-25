@@ -3,11 +3,7 @@
 clone
 
 ```sh
-git clone https://github.com/tonsky/FiraCode
-```
-
-```sh
-cd FiraCode/distr/ttf/
+git clone https://github.com/tonsky/FiraCode && cd FiraCode/distr/ttf/
 ```
 
 then
