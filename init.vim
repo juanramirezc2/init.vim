@@ -209,6 +209,11 @@ let g:airline#extensions#branch#enabled = 1 "TBH not sure what this means
 let g:airline#extensions#tabline#enabled = 1  " Mostrar buffers abiertos (como pestañas)
 let g:airline#extensions#tabline#fnamemod = ':t'  " Mostrar sólo el nombre del archivo
 let g:airline#extensions#tagbar#enabled = 1 "" muestra el nombre de la funcion en la que estoy :O
+let g:airline#extensions#tagbar#flags = 's'
+let g:airline_section_y = ''
+" remove separators for empty sections
+let g:airline_skip_empty_sections = 1
+
 "it seems that powerline fonts need this
 set t_Co=256
 " Cargar fuente Powerline y símbolos (ver nota)
@@ -537,13 +542,14 @@ vnoremap <Leader>r y :%s/<C-r>"//gc<Left><Left><Left>
 " clear search with shift+enter
 nnoremap <S-CR> :noh<CR>
 " gutentags out if the way
-let g:gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
-if g:gitroot !=# ''
-  let g:gutentags_cache_dir = g:gitroot .'/.git/tags'
-else
-  let g:gutentags_cache_dir = $HOME .'/.cache/guten_tags'
-endif
-let g:gutentags_exclude_project_root = ['/usr/local', $HOME]
+let g:gutentags_cache_dir = $HOME .'/.cache/guten_tags'
+"let g:gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
+"if g:gitroot !=# ''
+  "let g:gutentags_cache_dir = g:gitroot .'/.git/tags'
+"else
+  "let g:gutentags_cache_dir = $HOME .'/.cache/guten_tags'
+"endif
+"let g:gutentags_exclude_project_root = ['/usr/local', $HOME]
 let g:gutentags_file_list_command = {
       \ 'markers': {
       \ '.git': 'git ls-files',
