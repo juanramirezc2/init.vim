@@ -211,8 +211,9 @@ let g:airline#extensions#tabline#fnamemod = ':t'  " Mostrar sólo el nombre del 
 let g:airline#extensions#tagbar#enabled = 1 "" muestra el nombre de la funcion en la que estoy :O
 let g:airline#extensions#tagbar#flags = 's'
 let g:airline_section_y = ''
-" remove separators for empty sections
 let g:airline_skip_empty_sections = 1
+"let g:airline_section_y = %{tagbar#currenttag('[%s] ','')}
+" remove separators for empty sections
 
 "it seems that powerline fonts need this
 set t_Co=256
@@ -540,7 +541,7 @@ set inccommand=nosplit
 nnoremap <Leader>r :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
 vnoremap <Leader>r y :%s/<C-r>"//gc<Left><Left><Left>
 " clear search with shift+enter
-nnoremap <S-CR> :noh<CR>
+nnoremap <C-CR> :noh<CR>
 " gutentags out if the way
 let g:gutentags_cache_dir = $HOME .'/.cache/guten_tags'
 "let g:gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
@@ -559,4 +560,3 @@ let g:gutentags_resolve_symlinks = 1
 let g:gutentags_generate_on_missing = 1
 let g:gutentags_generate_on_new = 1
 let g:gutentags_generate_on_write = 1
-let g:gutentags_trace = 1
