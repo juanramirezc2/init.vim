@@ -1,3 +1,20 @@
+## comic code font with ligatures
+
+in
+
+```sh
+fonts/comic code with ligatures
+```
+
+install all the fonts and go to the iterm
+
+in iTerm go to
+
+`Preferences->Profiles->text`
+in Font select `Fira Code Regular`
+set Font size to `14`
+check set ligatures `on`
+
 ## iterm 2 Fira font with ligatures
 
 clone
@@ -12,12 +29,10 @@ then
 - Right click and select Open (alternatively Open With Font Book)
 - Select "Install Font"
 
-in iTerm go to
+in iterm go to
 
 `Preferences->Profiles->text`
-in Font select `Fira Code Regular`
-set Font size to `14`
-check set ligatures `on`
+in the non-ACCII font select fira code
 
 ## Iterm 2 one dark color scheme
 
