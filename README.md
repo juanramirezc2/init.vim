@@ -14,6 +14,8 @@ in iTerm go to
 in Font select `Fira Code Regular`
 set Font size to `14`
 check set ligatures `on`
+an image tell more than a thousand worlds
+![iterm text settings](https://i.paste.pics/ea6ce83237ec37dc2067e52a11c5579a.png)
 
 ## iterm 2 Fira font with ligatures
 
