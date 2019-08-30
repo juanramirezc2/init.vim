@@ -272,7 +272,7 @@ let g:ctrlp_root_markers = ['package.json']
 nmap <leader>f :tab split<CR>:Ack! ""<left>
 
 " en modo visual pega laeleccion en un nuevo comando ack :O :O
-vnoremap <Leader>f y:Ack <C-R>=fnameescape(@")<CR><CR>
+vnoremap <Leader>f y:Ack! <C-R>=fnameescape(@")<CR><CR>
 "buscar la palabra que hay bajo el cursor en una nueva pestana
 nmap <leader>F :tab split<CR>:Ack! <C-r><C-w><CR>
 
