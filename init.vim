@@ -260,6 +260,12 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll)$',
   \ }
 
+" <C-S> to open a vertical split same a nerdTree
+let g:ctrlp_prompt_mappings = {
+      \ 'AcceptSelection("v")': ['<c-s>', '<RightMouse>'], 
+      \ 'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-v>'],
+      \ }
+
 " ctrlp use .gitignore
 " https://github.com/kien/ctrlp.vim/issues/174
 let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
@@ -410,6 +416,7 @@ augroup END
 "use ag command the silver searcher seems faster and well supported more than
 "ack and not config needed it looks .gitignore for ignore patterns
 let g:ackprg = 'ag --nogroup --nocolor --column'
+" vertical splits more intuitive added to the right and equal height
 let g:ack_mappings = {
       \ "t": "<C-W><CR><C-W>T",
       \ "T": "<C-W><CR><C-W>TgT<C-W>j",
@@ -418,8 +425,8 @@ let g:ack_mappings = {
       \ "o": "<CR><C-W>j",
       \ "h": "<C-W><CR><C-W>K",
       \ "H": "<C-W><CR><C-W>K<C-W>b",
-      \ "v": "<C-W><CR><C-W>H<C-W>b<C-W>J<C-W>t",
-      \ "gv": "<C-W><CR><C-W>H<C-W>b<C-W>J" }
+      \ "s": "<C-W><CR><C-W>L<C-W>W<C-W>J<C-W>W<C-W>=", 
+      \ "S": "<C-W><CR><C-W>L<C-W>W<C-W>J<C-W>W<C-W>=<C-W>b" }
 let g:ack_lhandler = "botright lopen 20"
 " startify sessions and other tweaks
 let g:startify_session_dir = '~/.vim/session'
