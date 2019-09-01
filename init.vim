@@ -416,7 +416,7 @@ augroup END
 "use ag command the silver searcher seems faster and well supported more than
 "ack and not config needed it looks .gitignore for ignore patterns
 let g:ackprg = 'ag --nogroup --nocolor --column'
-" vertical splits more intuitive added to the right and equal height
+" vertical splits more intuitive stacked to the right and equal width
 let g:ack_mappings = {
       \ "t": "<C-W><CR><C-W>T",
       \ "T": "<C-W><CR><C-W>TgT<C-W>j",
