@@ -75,7 +75,7 @@ $ youcompleteme/install.py --ts-completer
 
 ```
 
-create a ~/jsconfig.json file with
+create a ~/.jsconfig.json file with
 
 ```json
 {
