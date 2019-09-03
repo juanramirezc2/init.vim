@@ -60,6 +60,10 @@ Plug 'tpope/vim-surround' "surround plugin
 " other plugins
 Plug 'vim-scripts/ReplaceWithRegister' "avoid visual selection when pasting 
 Plug 'christoomey/vim-system-copy' " copy into the system
+" custom caracters in vim emojis 😏
+Plug 'junegunn/vim-emoji'
+"distraction free let's hope this work
+Plug 'junegunn/goyo.vim'
 call plug#end()
 
 " Luego de esta línea puedes agregar tus configuraciones y mappings
@@ -249,6 +253,10 @@ let g:airline_mode_map = {
 set noshowmode  " No mostrar el modo actual (ya lo muestra la barra de estado)
 
 " Configuracion para gitgutter
+let g:gitgutter_sign_added = emoji#for('small_blue_diamond')
+let g:gitgutter_sign_modified = emoji#for('small_orange_diamond')
+let g:gitgutter_sign_removed = emoji#for('small_red_triangle')
+let g:gitgutter_sign_modified_removed = emoji#for('collision')
 " Actualizar barra cada 250 mili segundos
 set updatetime=250
 
@@ -290,8 +298,8 @@ let g:jsx_ext_required=0
 
 " ale configuraciones
 let g:ale_sign_column_always = 1
-let g:ale_sign_error = '>>'
-let g:ale_sign_warning = '--'
+let g:ale_sign_error = emoji#for('heavy_exclamation_mark') 
+let g:ale_sign_warning = emoji#for('grey_exclamation') 
 
 " Move between linting errors
 nmap <silent> ]r <Plug>(ale_previous_wrap)
@@ -322,15 +330,13 @@ let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+let g:syntastic_error_symbol = emoji#for('no_entry_sign')
+let g:syntastic_warning_symbol = emoji#for('negative_squared_cross_mark')
 " funciones y definiciones de variable usando f8
 nmap <F8> :TagbarToggle<CR>
 
@@ -570,3 +576,5 @@ let g:gutentags_generate_on_write = 1
 " autocompletion
 filetype plugin on
 set omnifunc=syntaxcomplete#Complete
+" emoji auto completion
+set completefunc=emoji#complete
