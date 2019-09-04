@@ -64,6 +64,8 @@ Plug 'christoomey/vim-system-copy' " copy into the system
 Plug 'junegunn/vim-emoji'
 "distraction free let's hope this work
 Plug 'junegunn/goyo.vim'
+"omni complete function for css updated to css3
+Plug 'othree/csscomplete.vim'
 call plug#end()
 
 " Luego de esta línea puedes agregar tus configuraciones y mappings
@@ -106,7 +108,7 @@ endif
 set expandtab
 
 " tagbar necesita que esto este activado
-filetype on
+filetype off
 
 " The number of spaces to use for each indent
 set shiftwidth=2
@@ -305,16 +307,24 @@ let g:ale_sign_warning = emoji#for('grey_exclamation')
 nmap <silent> ]r <Plug>(ale_previous_wrap)
 nmap <silent> [r <Plug>(ale_next_wrap)
 
+" vim css omnifunction  updated to css3 
+autocmd FileType css,less,sass setlocal omnifunc=csscomplete#CompleteCSS 
+
 " Don't show YCM's preview window [ I find it really annoying ]
 set completeopt-=preview
 let g:ycm_add_preview_to_completeopt = 0
-" you complete me config  for a better completion
-"
-" Start autocompletion after 4 chars
-"let g:ycm_min_num_of_chars_for_completion = 2
-"let g:ycm_min_num_identifier_candidate_chars = 2
-let g:ycm_enable_diagnostic_highlighting = 0
 
+" semantic completion for css and less run on almost every caracter that's
+" only semantics is shown and no snnipets for css, less as per
+" https://github.com/ycm-core/YouCompleteMe/issues/2893
+" trigger semantic omnicompletion for css,less and sass files when a regex is triggered
+let g:ycm_semantic_triggers = {
+      "\   'css': [ 're!^', 're!^\s+', ': ' ],
+      "\   'scss': [ 're!^', 're!^\s+', ': ' ],
+      "\   'less': [ 're!^', 're!^\s+', ': ' ],
+    "\ }
+
+" you complete me config  for a better completion
 " make YCM compatible with UltiSnips (using supertab)
 " taken from https://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
@@ -573,8 +583,3 @@ let g:gutentags_resolve_symlinks = 1
 let g:gutentags_generate_on_missing = 1
 let g:gutentags_generate_on_new = 1
 let g:gutentags_generate_on_write = 1
-" autocompletion
-filetype plugin on
-set omnifunc=syntaxcomplete#Complete
-" emoji auto completion
-set completefunc=emoji#complete
