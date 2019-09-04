@@ -314,15 +314,15 @@ autocmd FileType css,less,sass setlocal omnifunc=csscomplete#CompleteCSS
 set completeopt-=preview
 let g:ycm_add_preview_to_completeopt = 0
 
-" semantic completion for css and less run on almost every caracter that's
-" only semantics is shown and no snnipets for css, less as per
+" semantic completion triggers for css and less run on almost every caracter that's why
+" only semantics completion is shown and no snnipets completion for css, less as per
 " https://github.com/ycm-core/YouCompleteMe/issues/2893
 " trigger semantic omnicompletion for css,less and sass files when a regex is triggered
 let g:ycm_semantic_triggers = {
-      "\   'css': [ 're!^', 're!^\s+', ': ' ],
-      "\   'scss': [ 're!^', 're!^\s+', ': ' ],
-      "\   'less': [ 're!^', 're!^\s+', ': ' ],
-    "\ }
+      \   'css': [ 're!^', 're!^\s+', ': ' ],
+      \   'scss': [ 're!^', 're!^\s+', ': ' ],
+      \   'less': [ 're!^', 're!^\s+', ': ' ],
+      \ }
 
 " you complete me config  for a better completion
 " make YCM compatible with UltiSnips (using supertab)
