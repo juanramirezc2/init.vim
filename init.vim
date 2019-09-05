@@ -523,22 +523,17 @@ nnoremap <silent> <C-j> :call comfortable_motion#flick(g:comfortable_motion_impu
 vnoremap <silent> <C-j> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier  * 1)<CR>
 nnoremap <silent> <C-k> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier  * -1)<CR>
 vnoremap <silent> <C-k> :call comfortable_motion#flick(g:comfortable_motion_impulse_multiplier  * -1)<CR>
-" search mappings
-" `<Tab>`/`<S-Tab>` to move between matches without leaving incremental search.
-" Note dependency on `'wildcharm'` being set to `<C-z>` in order for this to
-" work.
-"cnoremap <expr> <Tab> getcmdtype() == '/' \|\| getcmdtype() == '?' ? '<CR>/<C-r>/' : '<C-z>'
-cnoremap <expr> <S-Tab> getcmdtype() == '/' \|\| getcmdtype() == '?' ? '<CR>?<C-r>/' : '<S-Tab>'
 " Store relative line number jumps in the jumplist if they exceed a threshold.
 nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k'
 nnoremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j'
 "nnoremap Q @q
 "Switch CWD to the directory of the open buffer
 map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
 " jk | Escaping!
 inoremap jk <Esc>
-xnoremap jk <Esc>
 cnoremap jk <C-c>
+
 " maximum lenght of characters displayed in a git diff 
 highlight ColorColumn ctermbg=gray
 set colorcolumn=125
@@ -565,13 +560,13 @@ vnoremap <Leader>r y :%s/<C-r>"//gc<Left><Left><Left>
 nnoremap <C-CR> :noh<CR>
 " gutentags out if the way
 let g:gutentags_cache_dir = $HOME .'/.cache/guten_tags'
+let g:gutentags_exclude_project_root = ['/usr/local', $HOME]
 "let g:gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
 "if g:gitroot !=# ''
   "let g:gutentags_cache_dir = g:gitroot .'/.git/tags'
 "else
   "let g:gutentags_cache_dir = $HOME .'/.cache/guten_tags'
 "endif
-"let g:gutentags_exclude_project_root = ['/usr/local', $HOME]
 let g:gutentags_file_list_command = {
       \ 'markers': {
       \ '.git': 'git ls-files',
