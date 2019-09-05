@@ -318,11 +318,9 @@ let g:ycm_add_preview_to_completeopt = 0
 " only semantics completion is shown and no snnipets completion for css, less as per
 " https://github.com/ycm-core/YouCompleteMe/issues/2893
 " trigger semantic omnicompletion for css,less and sass files when a regex is triggered
-let g:ycm_semantic_triggers = {
-      \   'css': [ 're!^', 're!^\s+', ': ' ],
-      \   'scss': [ 're!^', 're!^\s+', ': ' ],
-      \   'less': [ 're!^', 're!^\s+', ': ' ],
-      \ }
+"let g:ycm_semantic_triggers = {'css,scss,less': [ 're!^', 're!^\s+', ': ' ] }
+"let g:ycm_semantic_triggers =  { 'less,scss,css': [ 're!^\s{2,4}', 're!:\s+' ], 'html': ['<', '"', '</', ' '] }
+let g:ycm_semantic_triggers =  { 'less,scss,css': [ 're!^\s*', 're!:\s*' ], 'html': ['<', '"', '</', ' '] }
 
 " you complete me config  for a better completion
 " make YCM compatible with UltiSnips (using supertab)
