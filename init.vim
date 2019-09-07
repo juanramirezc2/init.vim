@@ -23,7 +23,6 @@ Plug 'ludovicchabant/vim-gutentags' " tags for vim, makes use of Universal Ctags
 Plug 'majutsushi/tagbar'  "ver todas las funciones y definiciones en un panel lateral para leer codigo :O
 " linters,syntax checkers and formatters
 Plug 'w0rp/ale' " analizador static asincrono
-Plug 'scrooloose/syntastic' " check sintaxi en tiempo real :O :O
 Plug 'sbdchd/neoformat' " Neo format suppert prettier out of the box :O
 " Git helpers
 Plug 'airblade/vim-gitgutter' " muestra los cambios en archivos en la parte izquierda donde estan los numeros de linea
@@ -36,7 +35,6 @@ Plug 'SirVer/ultisnips' " snnipets in vim  need python support in vim
 Plug 'honza/vim-snippets' " ultisnips come without any snippets so here they are 
 Plug 'epilande/vim-es2015-snippets' " Custom ultisnippets for ES2015 and vim
 Plug 'epilande/vim-react-snippets' "Custom ultisnippets for react and vim
-Plug 'ervandew/supertab' " supertab is needed  for YCM and UltiSnnipets integration
 Plug 'mattn/emmet-vim' " emmet para escribir un poco mas rapidin
 Plug 'mattn/webapi-vim' " emmet custom snippets need this plugin in order to work
 " Syntax highlighteres 
@@ -53,7 +51,6 @@ Plug 'michaeljsmith/vim-indent-object' " blocks of indentation as vim text objec
 Plug 'kana/vim-textobj-line' "Text objects for the current line
 Plug 'kana/vim-textobj-entire' "entire file as vim object
 " code auto completers and helpers
-Plug 'ycm-core/YouCompleteMe'  " auto completer to the game
 Plug 'scrooloose/nerdcommenter' " comment lines of code using this plugin 
 Plug 'alvan/vim-closetag' "Auto close (X)HTML tags
 Plug 'tpope/vim-surround' "surround plugin
@@ -64,8 +61,6 @@ Plug 'christoomey/vim-system-copy' " copy into the system
 Plug 'junegunn/vim-emoji'
 "distraction free let's hope this work
 Plug 'junegunn/goyo.vim'
-"omni complete function for css updated to css3
-Plug 'othree/csscomplete.vim'
 call plug#end()
 
 " Luego de esta línea puedes agregar tus configuraciones y mappings
@@ -210,7 +205,6 @@ endif
 
 " terminal emulator exit
 " configuracion para airline
-let g:airline#extensions#syntastic#enabled = 1 "syntastic esta activado 
 let g:airline#extensions#branch#enabled = 1 "TBH not sure what this means
 let g:airline#extensions#tabline#enabled = 1  " Mostrar buffers abiertos (como pestañas)
 let g:airline#extensions#tabline#fnamemod = ':t'  " Mostrar sólo el nombre del archivo
@@ -307,28 +301,6 @@ let g:ale_sign_warning = emoji#for('grey_exclamation')
 nmap <silent> ]r <Plug>(ale_previous_wrap)
 nmap <silent> [r <Plug>(ale_next_wrap)
 
-" vim css omnifunction  updated to css3 
-autocmd FileType css,less,sass setlocal omnifunc=csscomplete#CompleteCSS 
-
-" Don't show YCM's preview window [ I find it really annoying ]
-set completeopt-=preview
-let g:ycm_add_preview_to_completeopt = 0
-
-" semantic completion triggers for css and less run on almost every caracter that's why
-" only semantics completion is shown and no snnipets completion for css, less as per
-" https://github.com/ycm-core/YouCompleteMe/issues/2893
-" trigger semantic omnicompletion for css,less and sass files when a regex is triggered
-"let g:ycm_semantic_triggers = {'css,scss,less': [ 're!^', 're!^\s+', ': ' ] }
-"let g:ycm_semantic_triggers =  { 'less,scss,css': [ 're!^\s{2,4}', 're!:\s+' ], 'html': ['<', '"', '</', ' '] }
-let g:ycm_semantic_triggers =  { 'less,scss,css': [ 're!^\s*', 're!:\s*' ], 'html': ['<', '"', '</', ' '] }
-
-" you complete me config  for a better completion
-" make YCM compatible with UltiSnips (using supertab)
-" taken from https://stackoverflow.com/questions/14896327/ultisnips-and-youcompleteme
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-
 " emmet leader key to be tab
 let g:user_emmet_leader_key=','
 let g:user_emmet_mode='i'  " emmet only in insert mode, comma crashes with repeat search vim command
@@ -338,13 +310,6 @@ let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_error_symbol = emoji#for('no_entry_sign')
-let g:syntastic_warning_symbol = emoji#for('negative_squared_cross_mark')
 " funciones y definiciones de variable usando f8
 nmap <F8> :TagbarToggle<CR>
 
