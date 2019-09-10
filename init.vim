@@ -1,5 +1,10 @@
 " Directorio de plugins
 call plug#begin('~/.local/share/nvim/plugged')
+" code auto completers and helpers
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}"
+Plug 'scrooloose/nerdcommenter' " comment lines of code using this plugin 
+Plug 'alvan/vim-closetag' "Auto close (X)HTML tags
+Plug 'tpope/vim-surround' "surround plugin
 "startup and sessions managers
 Plug 'xolox/vim-misc' " vim-sessions require this one plugin in order to work :/
 Plug 'xolox/vim-session' " vim sessions support nerd tree open panels and buffers
@@ -15,15 +20,11 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'  " Temas para airline la barra en la parte baja
 Plug 'yggdroot/indentline' " indent guides lines let's see how they goes
 "File browsers
-Plug 'mileszs/ack.vim' " ack for vim NEEDS $ brew install ack to be installed in mac
-Plug 'ctrlpvim/ctrlp.vim'  "files autocomplete for vim
+Plug 'Shougo/denite.nvim' "Denite is a dark powered plugin for Neovim/Vim to unite all interfaces.
 Plug 'scrooloose/nerdtree' "proyect tree and structure
 " code browser Tags managers 
-Plug 'ludovicchabant/vim-gutentags' " tags for vim, makes use of Universal Ctags which generates tags .ctags config file taken from   universal ctags from 
+"Plug 'ludovicchabant/vim-gutentags' " tags for vim, makes use of Universal Ctags which generates tags .ctags config file taken from   universal ctags from 
 Plug 'majutsushi/tagbar'  "ver todas las funciones y definiciones en un panel lateral para leer codigo :O
-" linters,syntax checkers and formatters
-Plug 'w0rp/ale' " analizador static asincrono
-Plug 'sbdchd/neoformat' " Neo format suppert prettier out of the box :O
 " Git helpers
 Plug 'airblade/vim-gitgutter' " muestra los cambios en archivos en la parte izquierda donde estan los numeros de linea
 Plug 'tpope/vim-fugitive' " git on vim 
@@ -31,18 +32,14 @@ Plug 'xuyuanp/nerdtree-git-plugin' "nerd tree git status
 Plug 'jiangmiao/auto-pairs' " automaticamente cierra comillas o llaves
 Plug 'tpope/vim-sleuth' " ajusta la identacion y los espacios basados en el archivo :O
 " vim snnipets 
-Plug 'SirVer/ultisnips' " snnipets in vim  need python support in vim
 Plug 'honza/vim-snippets' " ultisnips come without any snippets so here they are 
 Plug 'epilande/vim-es2015-snippets' " Custom ultisnippets for ES2015 and vim
 Plug 'epilande/vim-react-snippets' "Custom ultisnippets for react and vim
 Plug 'mattn/emmet-vim' " emmet para escribir un poco mas rapidin
 Plug 'mattn/webapi-vim' " emmet custom snippets need this plugin in order to work
 " Syntax highlighteres 
-Plug 'leshill/vim-json' " vim json syntax highlight and other things not sure
-Plug 'pangloss/vim-javascript' "Vastly improved Javascript indentation and syntax support in Vim
-Plug 'mxw/vim-jsx' " coloreado de sintaxis e identacion
-Plug 'hail2u/vim-css3-syntax' "CSS3 syntax (and syntax defined in some foreign specifications) support for Vim's built-in syntax/css.vim
-Plug 'groenewege/vim-less' "This vim bundle adds syntax highlighting, indenting and autocompletion for the dynamic stylesheet language LESS.  
+"Plug 'pangloss/vim-javascript' "Vastly improved Javascript indentation and syntax support in Vim
+"Plug 'mxw/vim-jsx' " coloreado de sintaxis e identacion
 " Custom vim Text Objects
 Plug 'kana/vim-textobj-user' "vim-textobj-user - Create your own text objects for vim in an easy way
 Plug 'kana/vim-textobj-function' " vim text objects for functions C language Java Vim script 
@@ -50,10 +47,6 @@ Plug 'haya14busa/vim-textobj-function-syntax' "extends previous one vim-textobj-
 Plug 'michaeljsmith/vim-indent-object' " blocks of indentation as vim text objects
 Plug 'kana/vim-textobj-line' "Text objects for the current line
 Plug 'kana/vim-textobj-entire' "entire file as vim object
-" code auto completers and helpers
-Plug 'scrooloose/nerdcommenter' " comment lines of code using this plugin 
-Plug 'alvan/vim-closetag' "Auto close (X)HTML tags
-Plug 'tpope/vim-surround' "surround plugin
 " other plugins
 Plug 'vim-scripts/ReplaceWithRegister' "avoid visual selection when pasting 
 Plug 'christoomey/vim-system-copy' " copy into the system
@@ -253,42 +246,8 @@ let g:gitgutter_sign_added = emoji#for('small_blue_diamond')
 let g:gitgutter_sign_modified = emoji#for('small_orange_diamond')
 let g:gitgutter_sign_removed = emoji#for('small_red_triangle')
 let g:gitgutter_sign_modified_removed = emoji#for('collision')
-" Actualizar barra cada 250 mili segundos
-set updatetime=250
-
-"configuracion para ctrlp 
-" Archivos ignorados
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.(git|hg|svn)|node_modules)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ }
-
-" <C-S> to open a vertical split same a nerdTree
-let g:ctrlp_prompt_mappings = {
-      \ 'AcceptSelection("v")': ['<c-s>', '<RightMouse>'], 
-      \ 'AcceptSelection("h")': ['<c-x>', '<c-cr>', '<c-v>'],
-      \ }
-
-" ctrlp use .gitignore
-" https://github.com/kien/ctrlp.vim/issues/174
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-
-" root of the project is where the package.json is located
-let g:ctrlp_root_markers = ['package.json']
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Open a new tab and search for something 
-nmap <leader>f :tab split<CR>:Ack! ""<left>
-
-" en modo visual pega laeleccion en un nuevo comando ack :O :O
-vnoremap <Leader>f y:Ack! <C-R>=fnameescape(@")<CR><CR>
-"buscar la palabra que hay bajo el cursor en una nueva pestana
-nmap <leader>F :tab split<CR>:Ack! <C-r><C-w><CR>
-
-" necesito mirar como usar control P en modo visual 
-vnoremap <Leader>p y:CtrlP<CR><Insert>
-
 " Allow JSX in .js files
 let g:jsx_ext_required=0
 
@@ -336,8 +295,6 @@ vnoremap // y/\V<C-r>=escape(@",'/\')<CR><CR>
 
 " siempre abre un archivo bajo el cursor en un nuevo tab
 nmap gf <c-w>gf
-" custom ulti snippets
-let g:UltiSnipsSnippetDirectories=["UltiSnips", $HOME.'/.config/nvim/mycoolsnippets']
 
 " emmet vim custom snnipets i really love snippets
 let g:user_emmet_settings = webapi#json#decode(join(readfile(expand( $HOME.'/.config/nvim/emmet_custom/snippets.json')), "\n"))
@@ -385,28 +342,6 @@ let g:mta_filetypes = {
 
 "user same colors for highlight as vim uses
 let g:mta_use_matchparen_group = 1
-"run neoformat on save, text changed and leaving insert mode allowing to run the UnDo
-augroup fmt
-  autocmd!
-  autocmd BufWritePre *  Neoformat
-augroup END
-
-"ack vim mappings  and configs
-"use ag command the silver searcher seems faster and well supported more than
-"ack and not config needed it looks .gitignore for ignore patterns
-let g:ackprg = 'ag --nogroup --nocolor --column'
-" vertical splits more intuitive stacked to the right and equal width
-let g:ack_mappings = {
-      \ "t": "<C-W><CR><C-W>T",
-      \ "T": "<C-W><CR><C-W>TgT<C-W>j",
-      \ "go": "<CR>",
-      \ "O": "<CR><C-W><C-W>:ccl<CR>",
-      \ "o": "<CR><C-W>j",
-      \ "h": "<C-W><CR><C-W>K",
-      \ "H": "<C-W><CR><C-W>K<C-W>b",
-      \ "s": "<C-W><CR><C-W>L<C-W>W<C-W>J<C-W>W<C-W>=", 
-      \ "S": "<C-W><CR><C-W>L<C-W>W<C-W>J<C-W>W<C-W>=<C-W>b" }
-let g:ack_lhandler = "botright lopen 20"
 " startify sessions and other tweaks
 let g:startify_session_dir = '~/.vim/session'
 let g:startify_files_number = 10
@@ -472,8 +407,6 @@ nnoremap <C-U> :pop<cr>
 let g:AutoPairsMapCh = 'C-.'
 inoremap <C-h> <C-o>h
 inoremap <C-l> <C-o>a
-inoremap <C-j> <C-o>j
-inoremap <C-k> <C-o>k
 inoremap <C-^> <C-o><C-^> 
 "g*  next matching search (not whole word) pattern under cursor
 "g#  previous matching search (not whole word) pattern under cursor
@@ -541,3 +474,213 @@ let g:gutentags_resolve_symlinks = 1
 let g:gutentags_generate_on_missing = 1
 let g:gutentags_generate_on_new = 1
 let g:gutentags_generate_on_write = 1
+"coc vim suggested settings
+" if hidden is not set, TextEdit might fail.
+set hidden
+
+" Some servers have issues with backup files, see #649
+set nobackup
+set nowritebackup
+
+" Better display for messages
+set cmdheight=2
+
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+"
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+"inoremap <silent><expr> <TAB>
+      "\ pumvisible() ? "\<C-n>" :
+      "\ <SID>check_back_space() ? "\<TAB>" :
+      "\ coc#refresh()
+
+let g:coc_snippet_next = '<tab>'
+
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" Use `[c` and `]c` to navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+xmap <leader>fm  <Plug>(coc-format-selected)
+nmap <leader>fm  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,javascript.jsx,json,css,less setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Use <tab> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+nmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <S-TAB> <Plug>(coc-range-select-backword)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space><c-j>  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space><c-k>  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+" === Denite shorcuts === "
+"   ;         - Browser currently open buffers
+"   <leader>t - Browse list of files in current directory
+"   <leader>g - Search current directory for occurences of given term and close window if no results
+"   <leader>j - Search current directory for occurences of word under cursor
+nmap ; :Denite buffer<CR>
+nmap <leader>t :DeniteProjectDir file/rec<CR>
+nnoremap <leader>g :<C-u>Denite grep:. -no-empty<CR>
+nnoremap <leader>j :<C-u>DeniteCursorWord grep:.<CR>
+
+" Open file commands
+call denite#custom#map('insert,normal', "<C-t>", '<denite:do_action:tabopen>')
+call denite#custom#map('insert,normal', "<C-v>", '<denite:do_action:vsplit>')
+call denite#custom#map('insert,normal', "<C-h>", '<denite:do_action:split>')
+
+" Change file/rec command to ag.
+call denite#custom#var('file/rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+" Ag command on grep source
+call denite#custom#var('grep', 'command', ['ag'])
+call denite#custom#var('grep', 'default_opts', ['-i', '--vimgrep'])
+call denite#custom#var('grep', 'recursive_opts', [])
+call denite#custom#var('grep', 'pattern_opt', [])
+call denite#custom#var('grep', 'separator', ['--'])
+call denite#custom#var('grep', 'final_opts', [])
+
+" Remove date from buffer list
+call denite#custom#var('buffer', 'date_format', '')
+
+" Change matchers.
+call denite#custom#source('file_mru', 'matchers', ['matcher/fuzzy', 'matcher/project_files'])
+
+" Denite mappings quickfix panel action
+autocmd FileType denite call s:denite_my_settings()
+function! s:denite_my_settings() abort
+  nnoremap <silent><buffer><expr> <CR>
+  \ denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> d
+  \ denite#do_map('do_action', 'delete')
+  nnoremap <silent><buffer><expr> p
+  \ denite#do_map('do_action', 'preview')
+  nnoremap <silent><buffer><expr> q
+  \ denite#do_map('quit')
+  nnoremap <silent><buffer><expr> i
+  \ denite#do_map('open_filter_buffer')
+  nnoremap <silent><buffer><expr> <Space>
+  \ denite#do_map('toggle_select').'j'
+endfunction
+
+autocmd FileType denite-filter call s:denite_filter_my_settings()
+function! s:denite_filter_my_settings() abort
+  imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
+endfunction
+
+" Custom options for Denite
+"   auto_resize             - Auto resize the Denite window height automatically.
+"   prompt                  - Customize denite prompt
+"   direction               - Specify Denite window direction as directly below current pane
+"   winminheight            - Specify min height for Denite window
+"   highlight_mode_insert   - Specify h1-CursorLine in insert mode
+"   prompt_highlight        - Specify color of prompt
+"   highlight_matched_char  - Matched characters highlight
+"   highlight_matched_range - matched range highlight
+let s:denite_options = {'default' : {
+\ 'split': 'floating',
+\ 'start_filter': 1,
+\ 'auto_resize': 1,
+\ 'source_names': 'short',
+\ 'prompt': 'λ:',
+\ 'statusline': 0,
+\ 'highlight_matched_char': 'WildMenu',
+\ 'highlight_matched_range': 'Visual',
+\ 'highlight_window_background': 'Visual',
+\ 'highlight_filter_background': 'StatusLine',
+\ 'highlight_prompt': 'StatusLine',
+\ 'winrow': 1,
+\ 'vertical_preview': 1
+\ }}
+

@@ -66,6 +66,12 @@ in the non-ACCII font select fira code
 $brew install pbcopy
 ```
 
+## coc vim
+
+````sh
+:CocInstall coc-json coc-css coc-tsserver coc-snippets coc-eslint coc-prettier 
+```
+
 ## compile YCM using typescript engine
 
 run
@@ -73,7 +79,7 @@ run
 ```sh
 $ youcompleteme/install.py --ts-completer
 
-```
+````
 
 create a ~/.jsconfig.json file with
 
