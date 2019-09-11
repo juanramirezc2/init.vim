@@ -27,6 +27,7 @@ Plug 'scrooloose/nerdtree' "proyect tree and structure
 Plug 'majutsushi/tagbar'  "ver todas las funciones y definiciones en un panel lateral para leer codigo :O
 " Git helpers
 Plug 'airblade/vim-gitgutter' " muestra los cambios en archivos en la parte izquierda donde estan los numeros de linea
+Plug 'rhysd/git-messenger.vim' "Neovim plugin to reveal the commit messages under the cursor
 Plug 'tpope/vim-fugitive' " git on vim 
 Plug 'xuyuanp/nerdtree-git-plugin' "nerd tree git status
 Plug 'jiangmiao/auto-pairs' " automaticamente cierra comillas o llaves
