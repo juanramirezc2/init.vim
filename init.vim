@@ -614,7 +614,7 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 "   <leader>j - Search current directory for occurences of word under cursor
 nmap ; :Denite buffer<CR>
 nmap <leader>p :DeniteProjectDir file/rec<CR>
-nnoremap <leader>g :<C-u>Denite grep:. -no-empty<CR>
+nnoremap <leader>f :<C-u>Denite grep:. -no-empty<CR>
 nnoremap <leader>j :<C-u>DeniteCursorWord grep:.<CR>
 
 " Open file commands
