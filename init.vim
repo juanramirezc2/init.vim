@@ -2,6 +2,8 @@
 call plug#begin('~/.local/share/nvim/plugged')
 " code auto completers and helpers
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}"
+Plug 'mattn/emmet-vim' " emmet para escribir un poco mas rapidin
+Plug 'mattn/webapi-vim' " emmet custom snippets need this plugin in order to work
 Plug 'scrooloose/nerdcommenter' " comment lines of code using this plugin 
 Plug 'alvan/vim-closetag' "Auto close (X)HTML tags
 Plug 'tpope/vim-surround' "surround plugin
@@ -24,23 +26,17 @@ Plug 'Shougo/denite.nvim' "Denite is a dark powered plugin for Neovim/Vim to uni
 Plug 'scrooloose/nerdtree' "proyect tree and structure
 " code browser Tags managers 
 "Plug 'ludovicchabant/vim-gutentags' " tags for vim, makes use of Universal Ctags which generates tags .ctags config file taken from   universal ctags from 
-Plug 'majutsushi/tagbar'  "ver todas las funciones y definiciones en un panel lateral para leer codigo :O
 " Git helpers
 Plug 'airblade/vim-gitgutter' " muestra los cambios en archivos en la parte izquierda donde estan los numeros de linea
 Plug 'rhysd/git-messenger.vim' "Neovim plugin to reveal the commit messages under the cursor
 Plug 'tpope/vim-fugitive' " git on vim 
 Plug 'xuyuanp/nerdtree-git-plugin' "nerd tree git status
 Plug 'jiangmiao/auto-pairs' " automaticamente cierra comillas o llaves
-Plug 'tpope/vim-sleuth' " ajusta la identacion y los espacios basados en el archivo :O
 " vim snnipets 
 Plug 'honza/vim-snippets' " ultisnips come without any snippets so here they are 
 Plug 'epilande/vim-es2015-snippets' " Custom ultisnippets for ES2015 and vim
 Plug 'epilande/vim-react-snippets' "Custom ultisnippets for react and vim
-Plug 'mattn/emmet-vim' " emmet para escribir un poco mas rapidin
-Plug 'mattn/webapi-vim' " emmet custom snippets need this plugin in order to work
 " Syntax highlighteres 
-"Plug 'pangloss/vim-javascript' "Vastly improved Javascript indentation and syntax support in Vim
-"Plug 'mxw/vim-jsx' " coloreado de sintaxis e identacion
 " Custom vim Text Objects
 Plug 'kana/vim-textobj-user' "vim-textobj-user - Create your own text objects for vim in an easy way
 Plug 'kana/vim-textobj-function' " vim text objects for functions C language Java Vim script 
@@ -76,8 +72,6 @@ let g:loaded_matchit = 1
 :hi Cursor2 guifg=red guibg=red
 :set guicursor=n-v-c:block-Cursor/lCursor,i-ci-ve:ver25-Cursor2/lCursor2,r-cr:hor20,o:hor50
 
-set guifont=Fira\ Code:h12
-
 " Vim >=8.0 or Neovim >= 0.1.5
 if (has("termguicolors"))
    set termguicolors
@@ -95,9 +89,6 @@ endif
 
 " Indent using spaces instead of tabs
 set expandtab
-
-" tagbar necesita que esto este activado
-filetype off
 
 " The number of spaces to use for each indent
 set shiftwidth=2
@@ -202,11 +193,8 @@ endif
 let g:airline#extensions#branch#enabled = 1 "TBH not sure what this means
 let g:airline#extensions#tabline#enabled = 1  " Mostrar buffers abiertos (como pestañas)
 let g:airline#extensions#tabline#fnamemod = ':t'  " Mostrar sólo el nombre del archivo
-let g:airline#extensions#tagbar#enabled = 1 "" muestra el nombre de la funcion en la que estoy :O
-let g:airline#extensions#tagbar#flags = 's'
 let g:airline_section_y = ''
 let g:airline_skip_empty_sections = 1
-"let g:airline_section_y = %{tagbar#currenttag('[%s] ','')}
 " remove separators for empty sections
 
 "it seems that powerline fonts need this
@@ -272,15 +260,6 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " funciones y definiciones de variable usando f8
 nmap <F8> :TagbarToggle<CR>
-
-" tagbar auto open on supported files only
-"autocmd FileType c, javascript.jsx nested :TagbarOpen
- autocmd VimEnter * nested :call tagbar#autoopen(1)
-"tag bar width 
-let g:tagbar_width = 50
-let g:tagbar_compact = 1
-let g:tagbar_indent = 1
-let g:tagbar_show_visibility = 0
 
 " fugitive git mappings 
 nnoremap <silent><leader>gs :Gstatus<CR>
@@ -612,10 +591,11 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 "   <leader>t - Browse list of files in current directory
 "   <leader>g - Search current directory for occurences of given term and close window if no results
 "   <leader>j - Search current directory for occurences of word under cursor
-nmap ; :Denite buffer<CR>
+nmap ' :Denite buffer<CR>
 nmap <leader>p :DeniteProjectDir file/rec<CR>
 nnoremap <leader>f :<C-u>Denite grep:. -no-empty<CR>
-nnoremap <leader>j :<C-u>DeniteCursorWord grep:.<CR>
+vnoremap <leader>f y:<C-u>Denite  grep:. -input=<C-R>=fnameescape(@")<CR><CR>
+nnoremap <leader>fw :<C-u>DeniteCursorWord grep:.<CR>
 
 " Open file commands
 call denite#custom#map('insert,normal', "<C-t>", '<denite:do_action:tabopen>')
@@ -675,8 +655,17 @@ call denite#custom#option('default', {
       \ 'highlight_matched_char': 'WildMenu',
       \ 'highlight_matched_range': 'Visual',
       \ 'highlight_window_background': 'Visual',
-      \ 'highlight_filter_background': 'StatusLine',
+      \ 'highlight_filter_background': 'TermCursor',
       \ 'highlight_prompt': 'StatusLine',
-      \ 'winrow': 1,
+      \ 'wincol': &columns / 8 ,
+      \ 'winheight': 20 ,
+      \ 'winrow': &lines / 2 - 10 ,
+      \ 'winwidth': &columns * 6/8,
+      \ 'winminheight': 1,
       \ 'vertical_preview': 1
       \ })
+
+" Change highlight group of active/inactive windows
+function! Handle_Win_Enter()
+  setlocal winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
+endfunction
