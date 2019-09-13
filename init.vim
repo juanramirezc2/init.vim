@@ -436,24 +436,6 @@ nnoremap <Leader>r :%s/\<<C-r><C-w>\>//gc<Left><Left><Left>
 vnoremap <Leader>r y :%s/<C-r>"//gc<Left><Left><Left>
 " clear search with shift+enter
 nnoremap <C-CR> :noh<CR>
-" gutentags out if the way
-let g:gutentags_cache_dir = $HOME .'/.cache/guten_tags'
-let g:gutentags_exclude_project_root = ['/usr/local', $HOME]
-"let g:gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
-"if g:gitroot !=# ''
-  "let g:gutentags_cache_dir = g:gitroot .'/.git/tags'
-"else
-  "let g:gutentags_cache_dir = $HOME .'/.cache/guten_tags'
-"endif
-let g:gutentags_file_list_command = {
-      \ 'markers': {
-      \ '.git': 'git ls-files',
-      \ },
-      \ }
-let g:gutentags_resolve_symlinks = 1
-let g:gutentags_generate_on_missing = 1
-let g:gutentags_generate_on_new = 1
-let g:gutentags_generate_on_write = 1
 "coc vim suggested settings
 " if hidden is not set, TextEdit might fail.
 set hidden
@@ -664,8 +646,3 @@ call denite#custom#option('default', {
       \ 'winminheight': 1,
       \ 'vertical_preview': 1
       \ })
-
-" Change highlight group of active/inactive windows
-function! Handle_Win_Enter()
-  setlocal winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
-endfunction
