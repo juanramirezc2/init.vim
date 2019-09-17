@@ -37,6 +37,8 @@ Plug 'yuttie/comfortable-motion.vim' " smooth motions and avoid get losed scroll
 Plug 'andymass/vim-matchup' " drop-in replacement for the vim plugin matchit.vim
 Plug 'haya14busa/incsearch.vim' " Improved incremental searching for Vim
 "GUI customization
+Plug 'ntpeters/vim-better-whitespace' "Vim Better Whitespace Plugin
+Plug 'Shougo/echodoc.vim' "Print documents in echo area.
 Plug 'joshdick/onedark.vim' "Color scheme inspirado por el tema One Dark de Atom.
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'  " Temas para airline la barra en la parte baja

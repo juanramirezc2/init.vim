@@ -13,6 +13,10 @@ source ~/.config/nvim/plugins.vim
 " avoid messi matchi load
 let g:loaded_matchit = 1
 
+" echodoc by shouldgo
+" To use echodoc, you must increase 'cmdheight' value.
+set cmdheight=2
+let g:echodoc_enable_at_startup = 1
 " guicolors styles for every mode
 :set termguicolors
 :hi Cursor guifg=green guibg=green
