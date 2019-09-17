@@ -61,8 +61,6 @@ Plug 'epilande/vim-react-snippets' "Custom ultisnippets for react and vim
 " Syntax highlighteres 
 " Custom vim Text Objects
 Plug 'kana/vim-textobj-user' "vim-textobj-user - Create your own text objects for vim in an easy way
-Plug 'kana/vim-textobj-function' " vim text objects for functions C language Java Vim script 
-Plug 'haya14busa/vim-textobj-function-syntax' "extends previous one vim-textobj-function-syntax provides heuristic text-objects for function by using syntax definitions.
 Plug 'michaeljsmith/vim-indent-object' " blocks of indentation as vim text objects
 Plug 'kana/vim-textobj-line' "Text objects for the current line
 Plug 'kana/vim-textobj-entire' "entire file as vim object
