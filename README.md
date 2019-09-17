@@ -1,3 +1,13 @@
+## install nerd fonts 
+
+```sh
+brew tap homebrew/cask-fonts
+brew cask install font-hack-nerd-font
+```
+
+`Preferences->Profiles->text`
+in the non-ACCII font select hack nerd font
+TODO: patch comic code using [fontforge](https://github.com/ryanoasis/nerd-fonts#option-8-patch-your-own-font)
 ## comic code font with ligatures
 
 in
@@ -16,25 +26,6 @@ set Font size to `14`
 check set ligatures `on`
 an image tell more than a thousand worlds
 ![iterm text settings](https://i.paste.pics/ea6ce83237ec37dc2067e52a11c5579a.png)
-
-## iterm 2 Fira font with ligatures
-
-clone
-
-```sh
-git clone https://github.com/tonsky/FiraCode && cd FiraCode/distr/ttf/
-```
-
-then
-
-- Select all font files
-- Right click and select Open (alternatively Open With Font Book)
-- Select "Install Font"
-
-in iterm go to
-
-`Preferences->Profiles->text`
-in the non-ACCII font select fira code
 
 ## Iterm 2 one dark color scheme
 

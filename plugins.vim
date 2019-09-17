@@ -71,5 +71,7 @@ Plug 'christoomey/vim-system-copy' " copy into the system
 Plug 'junegunn/vim-emoji'
 "distraction free let's hope this work
 Plug 'junegunn/goyo.vim'
+" file icons
+Plug 'ryanoasis/vim-devicons' " vim will become visual studio 
 call plug#end()
 
