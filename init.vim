@@ -145,7 +145,9 @@ let g:airline#extensions#tabline#enabled = 1  " Mostrar buffers abiertos (como p
 let g:airline#extensions#tabline#fnamemod = ':t'  " Mostrar sólo el nombre del archivo
 let g:airline_section_y = ''
 let g:airline_skip_empty_sections = 1
-" remove separators for empty sections
+
+" vim airline please don't show me closed buffers
+let g:airline#extensions#tabline#show_buffers = 0
 
 "it seems that powerline fonts need this
 set t_Co=256
@@ -525,9 +527,12 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 "   <leader>j - Search current directory for occurences of word under cursor
 nmap ' :Denite buffer<CR>
 nmap <leader>p :DeniteProjectDir file/rec<CR>
-nnoremap <leader>f :<C-u>Denite grep:. -no-empty<CR>
-vnoremap <leader>f y:<C-u>Denite  grep:. -input=<C-R>=fnameescape(@")<CR><CR>
+nnoremap <leader>f :<C-u>Denite -no-empty grep:.<CR>
+vnoremap <leader>f y:<C-u>Denite -no-empty  grep:.::<C-R>=fnameescape(@")<CR><CR>
 nnoremap <leader>fw :<C-u>DeniteCursorWord grep:.<CR>
+nnoremap <leader>dp :Denite -resume -cursor-pos=-1 -immediately<CR>
+nnoremap <leader>dn :Denite -resume -cursor-pos=+1 -immediately<CR>
+nnoremap <leader>dl :Denite -resume -do='normal! A;'<CR>
 
 " Open file commands
 call denite#custom#map('insert,normal', "<C-t>", '<denite:do_action:tabopen>')
@@ -546,14 +551,18 @@ call denite#custom#var('grep', 'final_opts', [])
 
 " Remove date from buffer list
 call denite#custom#var('buffer', 'date_format', '')
-
+" narrow by tail path instead of full path in file/rec source.
+call denite#custom#source('file/rec', 'matchers', ['converter/tail_path', 'matcher/fuzzy'])
 " Change matchers.
 call denite#custom#source('file_mru', 'matchers', ['matcher/fuzzy', 'matcher/project_files'])
+" narrow by path in grep source
+call denite#custom#source('grep','converters', ['converter/abbr_word'])
 
 " Denite mappings quickfix panel action
 autocmd FileType denite call s:denite_my_settings()
 function! s:denite_my_settings() abort
   nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> o denite#do_map('do_action')
   nnoremap <silent><buffer><expr> d denite#do_map('do_action', 'delete')
   nnoremap <silent><buffer><expr> p denite#do_map('do_action', 'preview')
   nnoremap <silent><buffer><expr> s denite#do_map('do_action', 'vsplit')
@@ -567,16 +576,6 @@ autocmd FileType denite-filter call s:denite_filter_my_settings()
 function! s:denite_filter_my_settings() abort
   imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
 endfunction
-
-" Custom options for Denite
-"   auto_resize             - Auto resize the Denite window height automatically.
-"   prompt                  - Customize denite prompt
-"   direction               - Specify Denite window direction as directly below current pane
-"   winminheight            - Specify min height for Denite window
-"   highlight_mode_insert   - Specify h1-CursorLine in insert mode
-"   prompt_highlight        - Specify color of prompt
-"   highlight_matched_char  - Matched characters highlight
-"   highlight_matched_range - matched range highlight
 call denite#custom#option('default', {
       \ 'split': 'floating',
       \ 'start_filter': 1,
@@ -589,10 +588,14 @@ call denite#custom#option('default', {
       \ 'highlight_window_background': 'NormalFloat',
       \ 'highlight_filter_background': 'TermCursor',
       \ 'highlight_prompt': 'Special',
-      \ 'wincol': &columns / 8 ,
+      \ 'wincol': &columns / 10 ,
       \ 'winheight': 20 ,
       \ 'winrow': &lines / 2 - 10 ,
-      \ 'winwidth': &columns * 6/8,
+      \ 'winwidth': &columns * 8/10,
       \ 'winminheight': 1,
       \ 'vertical_preview': 1
       \ })
+"JsDoc mappings for a better coding
+nmap <silent> <leader>jd <Plug>(jsdoc)
+" Set floating window to be slightly transparent
+set winbl=10

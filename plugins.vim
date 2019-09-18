@@ -21,6 +21,7 @@ endif
 "" Directorio de plugins 
 call plug#begin('~/.local/share/nvim/plugged')
 " code auto completers and helpers
+Plug 'heavenshell/vim-jsdoc' "jsdoc.vim generates JSDoc block comments based on a function signature
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}"
 Plug 'mattn/emmet-vim' " emmet para escribir un poco mas rapidin
 Plug 'mattn/webapi-vim' " emmet custom snippets need this plugin in order to work
@@ -59,6 +60,7 @@ Plug 'honza/vim-snippets' " ultisnips come without any snippets so here they are
 Plug 'epilande/vim-es2015-snippets' " Custom ultisnippets for ES2015 and vim
 Plug 'epilande/vim-react-snippets' "Custom ultisnippets for react and vim
 " Syntax highlighteres 
+Plug 'sheerun/vim-polyglot' " general purpose highliter
 " Custom vim Text Objects
 Plug 'kana/vim-textobj-user' "vim-textobj-user - Create your own text objects for vim in an easy way
 Plug 'michaeljsmith/vim-indent-object' " blocks of indentation as vim text objects
