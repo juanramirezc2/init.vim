@@ -75,5 +75,9 @@ Plug 'junegunn/vim-emoji'
 Plug 'junegunn/goyo.vim'
 " file icons
 Plug 'ryanoasis/vim-devicons' " vim will become visual studio 
+Plug '907th/vim-auto-save' "Automatically save changes to disk in Vim
+Plug 'rhysd/clever-f.vim' "Extended f, F, t and T key mappings for Vim. 
+Plug 'wellle/targets.vim'  "Vim plugin that provides additional text objects
+Plug 'junegunn/vim-easy-align' "A Vim alignment plugin
+Plug 'chaoren/vim-wordmotion' "More useful word motions for Vim
 call plug#end()
-
