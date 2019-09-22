@@ -610,3 +610,14 @@ let g:indentLine_setConceal = 0
 let g:clever_f_across_no_line = 1
 let g:clever_f_fix_key_direction = 1
 let g:clever_f_timeout_ms = 3000
+" vim test we need more test
+let test#javascript#jest#executable = 'CI=true yarn test --colors'
+nnoremap <silent> <Leader>tt :TestNearest<CR>
+nnoremap <silent> <Leader>tf :TestFile<CR>
+nnoremap <silent> <Leader>ts :TestSuite<CR>
+nnoremap <silent> <Leader>tl :TestLast<CR>
+if has("nvim")
+    let test#strategy = "neovim"
+else
+    let test#strategy = "vimterminal"
+endif

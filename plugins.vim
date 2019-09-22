@@ -80,4 +80,5 @@ Plug 'rhysd/clever-f.vim' "Extended f, F, t and T key mappings for Vim.
 Plug 'wellle/targets.vim'  "Vim plugin that provides additional text objects
 Plug 'junegunn/vim-easy-align' "A Vim alignment plugin
 Plug 'chaoren/vim-wordmotion' "More useful word motions for Vim
+Plug 'janko-m/vim-test' "Run your tests at the speed of thought
 call plug#end()
