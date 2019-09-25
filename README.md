@@ -1,5 +1,8 @@
+## tmux 
+```sh
+brew install tmux
+```
 ## install nerd fonts 
-
 ```sh
 brew tap homebrew/cask-fonts
 brew cask install font-hack-nerd-font

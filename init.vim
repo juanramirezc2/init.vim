@@ -74,7 +74,7 @@ syntax enable
 set background=dark
 colorscheme onedark  " Activa tema onedark
 "" NerdTree configs
-let NERDTreeWinSize = 50  "estado por defecto del ancho de la barra de nerdtree 
+let NERDTreeWinSize = 40  "estado por defecto del ancho de la barra de nerdtree 
 " NerdTree Refresh Root crashes with my <S-R> command for moving between tags
 let NERDTreeMapRefreshRoot='r'
 
@@ -142,9 +142,13 @@ endif
 " configuracion para airline
 let g:airline#extensions#branch#enabled = 1 "TBH not sure what this means
 let g:airline#extensions#tabline#enabled = 1  " Mostrar buffers abiertos (como pestañas)
+let g:airline_statusline_ontop = 0 "no necesito mostrar el status line en la parte de arriba
+let g:airline#extensions#tabline#show_close_button = 0  " no necesito mostrar el boton de cerrar tab en la parte de arriba
+let g:airline#extensions#tabline#show_splits = 0
 let g:airline#extensions#tabline#fnamemod = ':t'  " Mostrar sólo el nombre del archivo
 let g:airline_section_y = ''
 let g:airline_skip_empty_sections = 1
+"let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
 " vim airline please don't show me closed buffers
 let g:airline#extensions#tabline#show_buffers = 0
@@ -308,8 +312,8 @@ nmap ) ])
 nmap <C-H> ^
 nmap <C-H> ^
 vmap <C-H> ^
-nnoremap <C-L> $
-vnoremap <C-L> $
+nnoremap <C-L> g_
+vnoremap <C-L> g_
 nnoremap <C-O> <C-I>
 nnoremap <C-I> <C-O>
 " map  HLM  to leader
@@ -596,14 +600,14 @@ call denite#custom#option('default', {
       \ 'vertical_preview': 1
       \ })
 "JsDoc mappings for a better coding
-nmap <silent> <leader>jd <Plug>(jsdoc)
+nmap <silent> <leader>doc <Plug>(jsdoc)
 " Set floating window to be slightly transparent
 set winbl=10
 " vim auto save events
 let g:auto_save        = 1
-let g:auto_save_silent = 1
+"let g:auto_save_silent = 1
 let g:auto_save_events = ["InsertLeave", "TextChanged", "FocusLost"]
-" vim indent line 
+" vim indent line
 let g:indentLine_faster = 1
 let g:indentLine_setConceal = 0
 " clever f settings
@@ -621,3 +625,8 @@ if has("nvim")
 else
     let test#strategy = "vimterminal"
 endif
+"easy align mappings
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
