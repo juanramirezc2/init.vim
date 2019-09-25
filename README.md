@@ -1,11 +1,14 @@
+## honer
+```sh
+https://github.com/puffnfresh/Honer.app
+```
 ## tmux 
 ```sh
 brew install tmux
 ```
-## install nerd fonts 
+## install download fira code retina patched witn nerd fonts
 ```sh
-brew tap homebrew/cask-fonts
-brew cask install font-hack-nerd-font
+git clone git clone https://github.com/ryanoasis/nerd-fonts && cd nerd-fonts && ./install.sh FiraCode
 ```
 
 `Preferences->Profiles->text`
