@@ -8,7 +8,7 @@ brew install tmux
 ```
 ## install download fira code retina patched witn nerd fonts
 ```sh
-git clone git clone https://github.com/ryanoasis/nerd-fonts && cd nerd-fonts && ./install.sh FiraCode
+git clone --depth 1 https://github.com/ryanoasis/nerd-fonts && cd nerd-fonts && ./install.sh FiraCode
 ```
 
 `Preferences->Profiles->text`
