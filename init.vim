@@ -87,7 +87,7 @@ map j gj
 map k gk
 
 " abrir vim.init en un ventana nueva love it
-nnoremap <leader>y :tabnew $MYVIMRC<CR>
+nnoremap <leader>vr :tabnew $MYVIMRC<CR>
 
 " Usar <líder> + y para copiar al portapapeles
 vnoremap <leader>c "+y
@@ -146,6 +146,7 @@ let g:airline_statusline_ontop = 0 "no necesito mostrar el status line en la par
 let g:airline#extensions#tabline#show_close_button = 0  " no necesito mostrar el boton de cerrar tab en la parte de arriba
 let g:airline#extensions#tabline#show_splits = 0
 let g:airline#extensions#tabline#fnamemod = ':t'  " Mostrar sólo el nombre del archivo
+let g:airline_section_x = "%{fnamemodify(getcwd(), ':t')}"
 let g:airline_section_y = ''
 let g:airline_skip_empty_sections = 1
 "let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
@@ -160,7 +161,7 @@ let g:airline_powerline_fonts = 1
 
 "only display the filename in airline status 
 let g:airline_section_c = '%t'
-
+"let g:airline_section_c = '%-0.20t'
 " set of text to display for each mode. this time a single letter is enought
 
 let g:airline_mode_map = {
@@ -556,9 +557,11 @@ call denite#custom#var('grep', 'final_opts', [])
 " Remove date from buffer list
 call denite#custom#var('buffer', 'date_format', '')
 " narrow by tail path instead of full path in file/rec source.
-call denite#custom#source('file/rec', 'matchers', ['converter/tail_path', 'matcher/fuzzy'])
+"call denite#custom#source('file/rec', 'matchers', ['converter/tail_path', 'matcher/fuzzy'])
+"
 " Change matchers.
 call denite#custom#source('file_mru', 'matchers', ['matcher/fuzzy', 'matcher/project_files'])
+
 " narrow by path in grep source
 call denite#custom#source('grep','converters', ['converter/abbr_word'])
 
@@ -580,10 +583,11 @@ autocmd FileType denite-filter call s:denite_filter_my_settings()
 function! s:denite_filter_my_settings() abort
   imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
 endfunction
+
 call denite#custom#option('default', {
       \ 'split': 'floating',
       \ 'start_filter': 1,
-      \ 'auto_resize': 1,
+      \ 'auto_resize': 0,
       \ 'source_names': 'short',
       \ 'prompt': 'λ:',
       \ 'statusline': 0,
@@ -602,7 +606,7 @@ call denite#custom#option('default', {
 "JsDoc mappings for a better coding
 nmap <silent> <leader>doc <Plug>(jsdoc)
 " Set floating window to be slightly transparent
-set winbl=10
+"set winbl=10
 " vim auto save events
 let g:auto_save        = 1
 "let g:auto_save_silent = 1
