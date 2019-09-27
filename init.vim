@@ -531,13 +531,18 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 "   <leader>g - Search current directory for occurences of given term and close window if no results
 "   <leader>j - Search current directory for occurences of word under cursor
 nmap ' :Denite buffer<CR>
-nmap <leader>p :DeniteProjectDir file/rec<CR>
+nmap <leader>p :Denite -start-filter file/rec:.<CR>
+nmap <leader>o :Denite -start-filter file/old:.<CR>
 nnoremap <leader>f :<C-u>Denite -no-empty grep:.<CR>
 vnoremap <leader>f y:<C-u>Denite -no-empty  grep:.::<C-R>=fnameescape(@")<CR><CR>
 nnoremap <leader>fw :<C-u>DeniteCursorWord grep:.<CR>
 nnoremap <leader>dp :Denite -resume -cursor-pos=-1 -immediately<CR>
 nnoremap <leader>dn :Denite -resume -cursor-pos=+1 -immediately<CR>
 nnoremap <leader>dl :Denite -resume -do='normal! A;'<CR>
+
+call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',
+      \ [ '.git/', '.ropeproject/', '__pycache__/*', '*.pyc', 'node_modules/',
+      \   'venv/', 'images/', '*.min.*', 'img/', 'fonts/', '*.png'])
 
 " Open file commands
 call denite#custom#map('insert,normal', "<C-t>", '<denite:do_action:tabopen>')
@@ -556,9 +561,13 @@ call denite#custom#var('grep', 'final_opts', [])
 
 " Remove date from buffer list
 call denite#custom#var('buffer', 'date_format', '')
+
 " narrow by tail path instead of full path in file/rec source.
-"call denite#custom#source('file/rec', 'matchers', ['converter/tail_path', 'matcher/fuzzy'])
-"
+call denite#custom#source('file/rec', 'matchers', ['converter/tail_path', 'matcher/fuzzy'])
+
+" narrow by tail path instead of full path in file/old source.
+call denite#custom#source('file/old', 'matchers', ['converter/tail_path', 'matcher/fuzzy'])
+
 " Change matchers.
 call denite#custom#source('file_mru', 'matchers', ['matcher/fuzzy', 'matcher/project_files'])
 
@@ -634,3 +643,6 @@ endif
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+" disable dev icons inside denite is slower AF 
+"  " Adding the custom source to denite
+let g:webdevicons_enable_denite = 0
