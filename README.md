@@ -165,11 +165,12 @@ rm -rf build
 then run
 
 ```sh
-$make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX=/usr/local install
+$ make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX=/usr/local install
 ```
 
 run`:checkhealth` for more info ;)
-
+# python3 support is needed for some plugins to work 😏 
+`$pip3 install --user neovim`
 # nodejs neovim plugins support ;)
 
 `$ npm install -g neovim`
